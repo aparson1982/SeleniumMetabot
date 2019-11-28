@@ -22,6 +22,14 @@ namespace SeleniumMetabot
                 actions.MoveToElement(item);
                 actions.Perform();
             }
+            if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
+            {
+                var item = SeleniumProperties.driver.FindElement(By.Name(element));
+                Actions actions = new Actions(SeleniumProperties.driver);
+                actions.MoveToElement(item);
+                actions.Perform();
+            }
+
             //TODO Finish Writing the rest of the method
         }
     }
