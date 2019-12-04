@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium.Chrome;
+using Protractor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace SeleniumMetabot
         public static void InitializeChromeDriver()
         {
             SeleniumProperties.driver = new ChromeDriver();
+            SeleniumProperties.ngDriver = new NgWebDriver(SeleniumProperties.driver);
         }
 
         public static void OpenUrl(string url)
