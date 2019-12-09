@@ -46,7 +46,7 @@ namespace SeleniumMetabot
             }
         }
 
-        public static string isElementExist(string elementType, string element)
+        public static string isElementAvailable(string elementType, string element)
         {
             string str = string.Empty;
             elementType = Regex.Replace(elementType, @"s", "");

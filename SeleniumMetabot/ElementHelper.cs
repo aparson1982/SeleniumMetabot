@@ -110,5 +110,126 @@ namespace SeleniumMetabot
             }
             return str;
         }
+
+
+
+        internal static int elementTypeHelper(string elementType, string element)
+        {
+            string str = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+
+            if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
+            {
+                if (SeleniumUtilities.IsElementPresent(By.Id(element)))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
+            {
+                if (SeleniumUtilities.IsElementPresent(By.Name(element)))
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
+            {
+                if (SeleniumUtilities.IsElementPresent(By.TagName(element)))
+                {
+                    return 3;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
+            {
+                if (SeleniumUtilities.IsElementPresent(By.PartialLinkText(element)))
+                {
+                    return 4;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
+            {
+                if (SeleniumUtilities.IsElementPresent(By.LinkText(element)))
+                {
+                    return 5;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
+            {
+                if (SeleniumUtilities.IsElementPresent(By.CssSelector(element)))
+                {
+                    return 6;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
+            {
+                if (SeleniumUtilities.IsElementPresent(By.XPath(element)))
+                {
+                    return 7;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+
+
+        internal static IWebElement WebElement(string elementType, string element)
+        {
+            try
+            {
+                switch (ElementHelper.elementTypeHelper(elementType, element))
+                {
+                    case 1:
+                        return driver.FindElement(By.Id(element));
+                    case 2:
+                        return driver.FindElement(By.Name(element));
+                    case 3:
+                        return driver.FindElement(By.TagName(element));
+                    case 4:
+                        return driver.FindElement(By.PartialLinkText(element));
+                    case 5:
+                        return driver.FindElement(By.LinkText(element));
+                    case 6:
+                        return driver.FindElement(By.CssSelector(element));
+                    case 7:
+                        return driver.FindElement(By.XPath(element));
+                }
+            }
+            catch (Exception )
+            {
+                throw;
+            }
+            
+        }
     }
 }

@@ -26,20 +26,16 @@ namespace SeleniumMetabot
 
         public static void DismissAlert()
         {
-            if (IsAlertPresent())
-            {
-                IAlert alert = driver.SwitchTo().Alert();
-                alert.Dismiss();
-            }
+            if (!IsAlertPresent()) return;
+            IAlert alert = driver.SwitchTo().Alert();
+            alert.Dismiss();
         }
 
         public static void AcceptAlert()
         {
-            if (IsAlertPresent())
-            {
-                IAlert alert = driver.SwitchTo().Alert();
-                alert.Accept();
-            }
+            if (!IsAlertPresent()) return;
+            IAlert alert = driver.SwitchTo().Alert();
+            alert.Accept();
         }
 
         public static string GetAlertText()

@@ -50,31 +50,34 @@ namespace SeleniumMetabot
                 {
                     driver.SwitchTo().Frame(driver.FindElement(By.Id(element)));
                 }
-                if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
+                else if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
                 {
                     driver.SwitchTo().Frame(element);
                 }
-                if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
+                else if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
                 {
                     driver.SwitchTo().Frame(driver.FindElement(By.TagName(element)));
                 }
-                if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
+                else if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
                 {
                     driver.SwitchTo().Frame(driver.FindElement(By.PartialLinkText(element)));
                 }
-                if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
+                else if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
                 {
                     driver.SwitchTo().Frame(driver.FindElement(By.LinkText(element)));
                 }
-                if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
+                else if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
                 {
                     driver.SwitchTo().Frame(driver.FindElement(By.CssSelector(element)));
                 }
-                if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
+                else if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
                 {
                     driver.SwitchTo().Frame(driver.FindElement(By.XPath(element)));
                 }
-
+                else
+                {
+                    str = "The argument elementType = " + elementType + " is invalid.  Please enter a valid elementType.";
+                }
                 
             }
             catch (Exception e)

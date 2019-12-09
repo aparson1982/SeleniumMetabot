@@ -15,9 +15,10 @@ namespace SeleniumMetabot
             try
             {
                 Screenshot image = ((ITakesScreenshot)driver).GetScreenshot();
-                string screenshot = image.AsBase64EncodedString;
+                str = image.AsBase64EncodedString;
                 byte[] screenshotAsByteArray = image.AsByteArray;
                 image.SaveAsFile(fqpn, ScreenshotImageFormat.Png);
+
             }
             catch (Exception e)
             {
