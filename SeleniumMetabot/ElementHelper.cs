@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -10,17 +11,18 @@ using System.Threading.Tasks;
 
 namespace SeleniumMetabot
 {
-    public class ElementHelper
+    public class ElementHelper : SeleniumProperties
     {
-        public static IWebElement FindElement(By by, int timeoutInSeconds)
-        {
-            if (timeoutInSeconds > 0)
-            {
-                var wait = new WebDriverWait(SeleniumProperties.driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                return wait.Until(drv => drv.FindElement(by));
-            }
-            return SeleniumProperties.driver.FindElement(by);
-        }
+        
+        //public static IWebElement FindElement(By by, int timeoutInSeconds)
+        //{
+        //    if (timeoutInSeconds > 0)
+        //    {
+        //        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+        //        return wait.Until(drv => drv.FindElement(by));
+        //    }
+        //    return driver.FindElement(by);
+        //}
 
         public static string Wait(string elementType, string element, int timeoutInSeconds)
         {
@@ -28,7 +30,7 @@ namespace SeleniumMetabot
             elementType = Regex.Replace(elementType, @"s", "");
             try
             {
-                WebDriverWait wait = new WebDriverWait(SeleniumProperties.driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
                 wait.Until<IWebElement>((d) =>
                 {
                     if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))

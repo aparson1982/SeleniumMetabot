@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using Protractor;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,12 @@ namespace SeleniumMetabot
 {
     public class SeleniumProperties
     {
-        public static IWebDriver driver { get; set; }
-        public static NgWebDriver ngDriver { get; set; }
+        internal static IWebDriver driver;
+        
+        internal static void InitializeDriver()
+        {
+            driver = new ChromeDriver();
+        }
+        //internal static NgWebDriver ngDriver { get; set; }
     }
 }

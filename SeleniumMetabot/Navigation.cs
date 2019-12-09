@@ -11,22 +11,23 @@ using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumMetabot
 {
-    public class Navigation
+    public class Navigation : SeleniumProperties
     {
+        
         public static void ScrollIntoView(string element, string elementType)
         {
             string str = string.Empty;
             if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
             {
-                var item = SeleniumProperties.driver.FindElement(By.Id(element));
-                Actions actions = new Actions(SeleniumProperties.driver);
+                var item = driver.FindElement(By.Id(element));
+                Actions actions = new Actions(driver);
                 actions.MoveToElement(item);
                 actions.Perform();
             }
             if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
             {
-                var item = SeleniumProperties.driver.FindElement(By.Name(element));
-                Actions actions = new Actions(SeleniumProperties.driver);
+                var item = driver.FindElement(By.Name(element));
+                Actions actions = new Actions(driver);
                 actions.MoveToElement(item);
                 actions.Perform();
             }
@@ -35,7 +36,7 @@ namespace SeleniumMetabot
 
         public static void NavigateTo(string url)
         {
-            SeleniumProperties.driver.Navigate().GoToUrl(url);
+            driver.Navigate().GoToUrl(url);
         }
 
 
@@ -47,31 +48,31 @@ namespace SeleniumMetabot
             {
                 if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
                 {
-                    SeleniumProperties.driver.SwitchTo().Frame(SeleniumProperties.driver.FindElement(By.Id(element)));
+                    driver.SwitchTo().Frame(driver.FindElement(By.Id(element)));
                 }
                 if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
                 {
-                    SeleniumProperties.driver.SwitchTo().Frame(element);
+                    driver.SwitchTo().Frame(element);
                 }
                 if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
                 {
-                    SeleniumProperties.driver.SwitchTo().Frame(SeleniumProperties.driver.FindElement(By.TagName(element)));
+                    driver.SwitchTo().Frame(driver.FindElement(By.TagName(element)));
                 }
                 if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
                 {
-                    SeleniumProperties.driver.SwitchTo().Frame(SeleniumProperties.driver.FindElement(By.PartialLinkText(element)));
+                    driver.SwitchTo().Frame(driver.FindElement(By.PartialLinkText(element)));
                 }
                 if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
                 {
-                    SeleniumProperties.driver.SwitchTo().Frame(SeleniumProperties.driver.FindElement(By.LinkText(element)));
+                    driver.SwitchTo().Frame(driver.FindElement(By.LinkText(element)));
                 }
                 if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
                 {
-                    SeleniumProperties.driver.SwitchTo().Frame(SeleniumProperties.driver.FindElement(By.CssSelector(element)));
+                    driver.SwitchTo().Frame(driver.FindElement(By.CssSelector(element)));
                 }
                 if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
                 {
-                    SeleniumProperties.driver.SwitchTo().Frame(SeleniumProperties.driver.FindElement(By.XPath(element)));
+                    driver.SwitchTo().Frame(driver.FindElement(By.XPath(element)));
                 }
 
                 
@@ -92,7 +93,10 @@ namespace SeleniumMetabot
         /// </summary>
         public static void SwitchToDefaultFrame()
         {
-            SeleniumProperties.driver.SwitchTo().DefaultContent();
+            driver.SwitchTo().DefaultContent();
         }
+
+
+        
     }
 }

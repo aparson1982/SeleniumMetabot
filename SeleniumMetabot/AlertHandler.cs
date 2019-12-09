@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace SeleniumMetabot
 {
-    public class AlertHandler
+    public class AlertHandler : SeleniumProperties
     {
+        
         public static bool IsAlertPresent()
         {
             try
             {
-                SeleniumProperties.driver.SwitchTo().Alert();
+                IAlert alert = driver.SwitchTo().Alert();
                 return true;
             }
             catch (NoAlertPresentException e)
@@ -26,9 +28,8 @@ namespace SeleniumMetabot
         {
             if (IsAlertPresent())
             {
-                SeleniumProperties.driver.SwitchTo().Alert();
-                SeleniumProperties.driver.SwitchTo().Alert().Accept();
-                SeleniumProperties.driver.SwitchTo().DefaultContent();
+                IAlert alert = driver.SwitchTo().Alert();
+                alert.Dismiss();
             }
         }
 
@@ -36,10 +37,30 @@ namespace SeleniumMetabot
         {
             if (IsAlertPresent())
             {
-                SeleniumProperties.driver.SwitchTo().Alert();
-                SeleniumProperties.driver.SwitchTo().Alert().Dismiss();
-                SeleniumProperties.driver.SwitchTo().DefaultContent();
+                IAlert alert = driver.SwitchTo().Alert();
+                alert.Accept();
             }
+        }
+
+        public static string GetAlertText()
+        {
+            string str = string.Empty;
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                str = alert.Text;
+            }
+            catch (Exception e)
+            {
+                str = "Message:  " + e.Message + Environment.NewLine +
+                                    "Source:  " + e.Source + Environment.NewLine +
+                                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                                    "Target Site:  " + e.TargetSite + Environment.NewLine +
+                                    "Help Link:  " + e.HelpLink + Environment.NewLine +
+                                    "Data:  " + e.Data;
+            }
+            return str;
         }
 
     }

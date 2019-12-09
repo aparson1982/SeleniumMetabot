@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using Protractor;
 using System;
 using System.Collections.Generic;
@@ -8,23 +9,53 @@ using System.Threading.Tasks;
 
 namespace SeleniumMetabot
 {
-    public class Initialize
+    public class Initialize : SeleniumProperties
     {
-        public static void InitializeChromeDriver()
-        {
-            SeleniumProperties.driver = new ChromeDriver();
-            SeleniumProperties.ngDriver = new NgWebDriver(SeleniumProperties.driver);
-        }
 
-        public static void OpenUrl(string url)
+        //public static string InitializeChromeDriver()
+        //{
+        //    string str = string.Empty;
+        //    try
+        //    {
+        //        _ = driver;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        str = "Message:  " + e.Message + Environment.NewLine +
+        //            "Source:  " + e.Source + Environment.NewLine +
+        //            "StackTrace:  " + e.StackTrace + Environment.NewLine +
+        //            "Inner Exception:  " + e.InnerException + Environment.NewLine +
+        //            "Target Site:  " + e.TargetSite + Environment.NewLine +
+        //            "Help Link:  " + e.HelpLink + Environment.NewLine +
+        //            "Data:  " + e.Data;
+        //    }
+        //    return str;
+        //}
+
+        public static string OpenUrl(string url)
         {
-            SeleniumProperties.driver = new ChromeDriver();
-            SeleniumProperties.driver.Url = url;
+            string str = string.Empty;
+            try
+            {
+                InitializeDriver();
+                driver.Url = url;
+            }
+            catch (Exception e)
+            {
+                str = "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Target Site:  " + e.TargetSite + Environment.NewLine +
+                    "Help Link:  " + e.HelpLink + Environment.NewLine +
+                    "Data:  " + e.Data;
+            }
+            return str;
         }
 
         public static void NavigateToUrl(string url)
         {
-            SeleniumProperties.driver.Navigate().GoToUrl(url);
+            driver.Navigate().GoToUrl(url);
         }
     }
 }

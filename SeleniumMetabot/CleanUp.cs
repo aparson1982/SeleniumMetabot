@@ -1,16 +1,19 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeleniumMetabot
+namespace SeleniumMetabot 
 {
-    public class CleanUp
+    public class CleanUp : SeleniumProperties
     {
+        
         public static void Demolish()
         {
-            SeleniumProperties.driver.Close();
+            driver.Close();
         }
     }
 }

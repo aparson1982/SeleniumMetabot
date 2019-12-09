@@ -60,6 +60,7 @@
     <Compile Include="Initialize.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PageSetup.cs" />
+    <Compile Include="ScreenShot.cs" />
     <Compile Include="SeleniumGetMethods.cs" />
     <Compile Include="SeleniumProperties.cs" />
     <Compile Include="SeleniumSetMethods.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="SeleniumUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
