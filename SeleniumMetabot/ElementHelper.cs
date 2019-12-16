@@ -33,70 +33,12 @@ namespace SeleniumMetabot
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
                 wait.Until<IWebElement>((d) =>
                 {
-                    if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
+                    IWebElement webElement = ElementHelper.WebElement(elementType, element);
+                    if (webElement.Displayed && webElement.Enabled || webElement.GetAttribute("aria-disabled") == null)
                     {
-                        IWebElement webElement = d.FindElement(By.Id(element));
-                        if (webElement.Displayed && webElement.Enabled && webElement.GetAttribute("aria-disabled") == null)
-                        {
-                            str = "Found by Id.";
-                            return webElement;
-                        }
+                       return webElement;
                     }
-                    if ((elementType.ToLower().Trim(' ') == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                    {
-                        IWebElement webElement = d.FindElement(By.Name(element));
-                        if (webElement.Displayed && webElement.Enabled && webElement.GetAttribute("aria-disabled") == null)
-                        {
-                            str = "Found by Name.";
-                            return webElement;
-                        }
-                    }
-                    if ((elementType.ToLower().Trim(' ') == "tagname") || (elementType.ToLower().Trim(' ') == "tn"))
-                    {
-                        IWebElement webElement = d.FindElement(By.TagName(element));
-                        if (webElement.Displayed && webElement.Enabled && webElement.GetAttribute("aria-disabled") == null)
-                        {
-                            str = "Found by TagName.";
-                            return webElement;
-                        }
-                    }
-                    if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
-                    {
-                        IWebElement webElement = d.FindElement(By.PartialLinkText(element));
-                        if (webElement.Displayed && webElement.Enabled && webElement.GetAttribute("aria-disabled") == null)
-                        {
-                            str = "Found by Partial Link Text.";
-                            return webElement;
-                        }
-                    }
-                    if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
-                    {
-                        IWebElement webElement = d.FindElement(By.LinkText(element));
-                        if (webElement.Displayed && webElement.Enabled && webElement.GetAttribute("aria-disabled") == null)
-                        {
-                            str = "Found by Link Text.";
-                            return webElement;
-                        }
-                    }
-                    if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                    {
-                        IWebElement webElement = d.FindElement(By.CssSelector(element));
-                        if (webElement.Displayed && webElement.Enabled && webElement.GetAttribute("aria-disabled") == null)
-                        {
-                            str = "Found by CSS Selector.";
-                            return webElement;
-                        }
-                    }
-                    if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                    {
-                        IWebElement webElement = d.FindElement(By.XPath(element));
-                        if (webElement.Displayed && webElement.Enabled && webElement.GetAttribute("aria-disabled") == null)
-                        {
-                            str = "Found by XPath.";
-                            return webElement;
-                        }
-                    }
-                    return null;
+                    throw new TimeoutException("Timed out.");
 
                 });
                 return str;
@@ -113,87 +55,38 @@ namespace SeleniumMetabot
 
 
 
-        internal static int elementTypeHelper(string elementType, string element)
+        private static int WebElementHelper(string elementType, string element)
         {
             string str = string.Empty;
             elementType = Regex.Replace(elementType, @"s", "");
 
             if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
             {
-                if (SeleniumUtilities.IsElementPresent(By.Id(element)))
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 1;
             }
             if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
             {
-                if (SeleniumUtilities.IsElementPresent(By.Name(element)))
-                {
-                    return 2;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 2;
             }
             if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
             {
-                if (SeleniumUtilities.IsElementPresent(By.TagName(element)))
-                {
-                    return 3;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 3;
             }
             if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
             {
-                if (SeleniumUtilities.IsElementPresent(By.PartialLinkText(element)))
-                {
-                    return 4;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 4;
             }
             if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
             {
-                if (SeleniumUtilities.IsElementPresent(By.LinkText(element)))
-                {
-                    return 5;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 5;
             }
             if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
             {
-                if (SeleniumUtilities.IsElementPresent(By.CssSelector(element)))
-                {
-                    return 6;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 6;
             }
             if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
             {
-                if (SeleniumUtilities.IsElementPresent(By.XPath(element)))
-                {
-                    return 7;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 7;
             }
             else
             {
@@ -201,13 +94,11 @@ namespace SeleniumMetabot
             }
         }
 
-
-
         internal static IWebElement WebElement(string elementType, string element)
         {
             try
             {
-                switch (ElementHelper.elementTypeHelper(elementType, element))
+                switch (ElementHelper.WebElementHelper(elementType, element))
                 {
                     case 1:
                         return driver.FindElement(By.Id(element));
@@ -223,13 +114,182 @@ namespace SeleniumMetabot
                         return driver.FindElement(By.CssSelector(element));
                     case 7:
                         return driver.FindElement(By.XPath(element));
+                    default:
+                        throw new ArgumentException("The given argument " + elementType + " for elementType is invalid.");
                 }
             }
-            catch (Exception )
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
             
+        }
+
+        internal static bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static string IsElementAvailable(string elementType, string element)
+        {
+            string str = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+
+            switch (ElementHelper.WebElementHelper(elementType, element))
+            {
+                case 1:
+                    if (IsElementPresent(By.Id(element)))
+                    {
+                        return true.ToString();
+                    }
+                    else
+                    {
+                        return false.ToString();
+                    }
+                case 2:
+                    if (IsElementPresent(By.Name(element)))
+                    {
+                        return true.ToString();
+                    }
+                    else
+                    {
+                        return false.ToString();
+                    }
+                case 3:
+                    if (IsElementPresent(By.TagName(element)))
+                    {
+                        return true.ToString();
+                    }
+                    else
+                    {
+                        return false.ToString();
+                    }
+                case 4:
+                    if (IsElementPresent(By.PartialLinkText(element)))
+                    {
+                        return true.ToString();
+                    }
+                    else
+                    {
+                        return false.ToString();
+                    }
+                case 5:
+                    if (IsElementPresent(By.LinkText(element)))
+                    {
+                        return true.ToString();
+                    }
+                    else
+                    {
+                        return false.ToString();
+                    }
+                case 6:
+                    if (IsElementPresent(By.CssSelector(element)))
+                    {
+                        return true.ToString();
+                    }
+                    else
+                    {
+                        return false.ToString();
+                    }
+                case 7:
+                    if (IsElementPresent(By.XPath(element)))
+                    {
+                        return true.ToString();
+                    }
+                    else
+                    {
+                        return false.ToString();
+                    }
+                default:
+                    throw new ArgumentException("The given argument " + elementType + " for elementType is invalid.");
+            }
+
+            //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
+            //{
+            //    if (IsElementPresent(By.Id(element)))
+            //    {
+            //        return true.ToString();
+            //    }
+            //    else
+            //    {
+            //        return false.ToString();
+            //    }
+            //}
+            //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
+            //{
+            //    if (IsElementPresent(By.Name(element)))
+            //    {
+            //        return true.ToString();
+            //    }
+            //    else
+            //    {
+            //        return false.ToString();
+            //    }
+            //}
+            //if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
+            //{
+            //    if (IsElementPresent(By.TagName(element)))
+            //    {
+            //        return true.ToString();
+            //    }
+            //    else
+            //    {
+            //        return false.ToString();
+            //    }
+            //}
+            //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
+            //{
+            //    if (IsElementPresent(By.PartialLinkText(element)))
+            //    {
+            //        return true.ToString();
+            //    }
+            //    else
+            //    {
+            //        return false.ToString();
+            //    }
+            //}
+            //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
+            //{
+            //    if (IsElementPresent(By.LinkText(element)))
+            //    {
+            //        return true.ToString();
+            //    }
+            //    else
+            //    {
+            //        return false.ToString();
+            //    }
+            //}
+            //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
+            //{
+            //    if (IsElementPresent(By.CssSelector(element)))
+            //    {
+            //        return true.ToString();
+            //    }
+            //    else
+            //    {
+            //        return false.ToString();
+            //    }
+            //}
+            //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
+            //{
+            //    if (IsElementPresent(By.XPath(element)))
+            //    {
+            //        return true.ToString();
+            //    }
+            //    else
+            //    {
+            //        return false.ToString();
+            //    }
+            //}
+            //return "Invalid Argument For ElementType:  " + elementType + " is not a valid element type.";
         }
     }
 }

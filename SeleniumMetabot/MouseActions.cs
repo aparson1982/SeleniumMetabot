@@ -21,54 +21,17 @@ namespace SeleniumMetabot
             try
             {
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
-
-
-                //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                //{
-                //    webElement = driver.FindElement(By.Id(element));
-                    
-                //}
-                //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                //{
-                //    webElement = driver.FindElement(By.Name(element));
-
-                //}
-                //if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn") || (elementType.ToLower() == "t") || (elementType.ToLower() == "tag"))
-                //{
-                //    webElement = driver.FindElement(By.TagName(element));
-
-                //}
-                //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl") || (elementType.ToLower() == "plink"))
-                //{
-                //    webElement = driver.FindElement(By.PartialLinkText(element));
-
-                //}
-                //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt") || (elementType.ToLower() == "link"))
-                //{
-                //    webElement = driver.FindElement(By.LinkText(element));
-
-                //}
-                //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                //{
-                //    webElement = driver.FindElement(By.CssSelector(element));
-  
-                //}
-                //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                //{
-                //    webElement = driver.FindElement(By.XPath(element));
-                    
-                //}
-
-
+                
                 if (webElement != null)
                 {
                     actions.Click(webElement).Perform();
                     str = "Clicked " + webElement.Text;
                 }
-                
+                MethodSuccess = true;
             }
             catch (Exception e)
             {
+                MethodSuccess = false;
                 str = "Click Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
@@ -85,51 +48,18 @@ namespace SeleniumMetabot
             Actions actions = new Actions(driver);
             try
             {
-                IWebElement webElement = null;
-                if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                {
-                    webElement = driver.FindElement(By.Id(element));
-
-                }
-                if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                {
-                    webElement = driver.FindElement(By.Name(element));
-
-                }
-                if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
-                {
-                    webElement = driver.FindElement(By.TagName(element));
-
-                }
-                if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
-                {
-                    webElement = driver.FindElement(By.PartialLinkText(element));
-   
-                }
-                if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
-                {
-                    webElement = driver.FindElement(By.LinkText(element));
-
-                }
-                if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                {
-                    webElement = driver.FindElement(By.CssSelector(element));
-
-                }
-                if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                {
-                    webElement = driver.FindElement(By.XPath(element));
-
-                }
+                IWebElement webElement = ElementHelper.WebElement(elementType, element);
 
                 if (webElement != null)
                 {
                     webElement.Submit();
                     str = "Clicked " + webElement.Text;
                 }
+                MethodSuccess = true;
             }
             catch (Exception e)
             {
+                MethodSuccess = false;
                 str = "Submit Exception." + Environment.NewLine + 
                       "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
@@ -147,46 +77,49 @@ namespace SeleniumMetabot
             Actions actions = new Actions(driver);
             try
             {
-                IWebElement webElement = null;
-                if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                {
-                    webElement = driver.FindElement(By.Id(element));
-                    actions.ContextClick(webElement).Perform();
-                }
-                if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                {
-                    webElement = driver.FindElement(By.Name(element));
-                    actions.ContextClick(webElement).Perform();
-                }
-                if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn") || (elementType.ToLower() == "t") || (elementType.ToLower() == "tag"))
-                {
-                    webElement = driver.FindElement(By.TagName(element));
-                    actions.ContextClick(webElement).Perform();
-                }
-                if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl") || (elementType.ToLower() == "plink"))
-                {
-                    webElement = driver.FindElement(By.PartialLinkText(element));
-                    actions.ContextClick(webElement).Perform();
-                }
-                if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt") || (elementType.ToLower() == "link"))
-                {
-                    webElement = driver.FindElement(By.LinkText(element));
-                    actions.ContextClick(webElement).Perform();
-                }
-                if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                {
-                    webElement = driver.FindElement(By.CssSelector(element));
-                    actions.ContextClick(webElement).Perform();
-                }
-                if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                {
-                    webElement = driver.FindElement(By.XPath(element));
-                    actions.ContextClick(webElement).Perform();
-                }
+                IWebElement webElement = ElementHelper.WebElement(elementType, element);
+                actions.ContextClick(webElement).Perform();
+                //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
+                //{
+                //    webElement = driver.FindElement(By.Id(element));
+                //    actions.ContextClick(webElement).Perform();
+                //}
+                //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
+                //{
+                //    webElement = driver.FindElement(By.Name(element));
+                //    actions.ContextClick(webElement).Perform();
+                //}
+                //if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn") || (elementType.ToLower() == "t") || (elementType.ToLower() == "tag"))
+                //{
+                //    webElement = driver.FindElement(By.TagName(element));
+                //    actions.ContextClick(webElement).Perform();
+                //}
+                //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl") || (elementType.ToLower() == "plink"))
+                //{
+                //    webElement = driver.FindElement(By.PartialLinkText(element));
+                //    actions.ContextClick(webElement).Perform();
+                //}
+                //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt") || (elementType.ToLower() == "link"))
+                //{
+                //    webElement = driver.FindElement(By.LinkText(element));
+                //    actions.ContextClick(webElement).Perform();
+                //}
+                //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
+                //{
+                //    webElement = driver.FindElement(By.CssSelector(element));
+                //    actions.ContextClick(webElement).Perform();
+                //}
+                //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
+                //{
+                //    webElement = driver.FindElement(By.XPath(element));
+                //    actions.ContextClick(webElement).Perform();
+                //}
                 if (webElement != null) str = "Clicked " + webElement.Text;
+                MethodSuccess = true;
             }
             catch (Exception e)
             {
+                MethodSuccess = false;
                 str = "RightClick Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
@@ -203,48 +136,51 @@ namespace SeleniumMetabot
             IJavaScriptExecutor executor = driver as IJavaScriptExecutor;
             try
             {
-                IWebElement webElement = null;
-                if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                {
-                    webElement = driver.FindElement(By.Id(element));
-                    executor?.ExecuteScript("arguments[0].click();", webElement);
-                }
-                if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                {
-                    webElement = driver.FindElement(By.Name(element));
-                    executor?.ExecuteScript("arguments[0].click();", webElement);
-                }
-                if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn") || (elementType.ToLower() == "t") || (elementType.ToLower() == "tag"))
-                {
-                    webElement = driver.FindElement(By.TagName(element));
-                    executor?.ExecuteScript("arguments[0].click();", webElement);
-                }
-                if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl") || (elementType.ToLower() == "plink"))
-                {
-                    webElement = driver.FindElement(By.PartialLinkText(element));
-                    executor?.ExecuteScript("arguments[0].click();", webElement);
-                }
-                if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt") || (elementType.ToLower() == "link"))
-                {
-                    webElement = driver.FindElement(By.LinkText(element));
-                    executor?.ExecuteScript("arguments[0].click();", webElement);
-                }
-                if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                {
-                    webElement = driver.FindElement(By.CssSelector(element));
-                    executor?.ExecuteScript("arguments[0].click();", webElement);
+                IWebElement webElement = ElementHelper.WebElement(elementType, element);
+                executor?.ExecuteScript("arguments[0].click();", webElement);
+                //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
+                //{
+                //    webElement = driver.FindElement(By.Id(element));
+                //    executor?.ExecuteScript("arguments[0].click();", webElement);
+                //}
+                //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
+                //{
+                //    webElement = driver.FindElement(By.Name(element));
+                //    executor?.ExecuteScript("arguments[0].click();", webElement);
+                //}
+                //if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn") || (elementType.ToLower() == "t") || (elementType.ToLower() == "tag"))
+                //{
+                //    webElement = driver.FindElement(By.TagName(element));
+                //    executor?.ExecuteScript("arguments[0].click();", webElement);
+                //}
+                //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl") || (elementType.ToLower() == "plink"))
+                //{
+                //    webElement = driver.FindElement(By.PartialLinkText(element));
+                //    executor?.ExecuteScript("arguments[0].click();", webElement);
+                //}
+                //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt") || (elementType.ToLower() == "link"))
+                //{
+                //    webElement = driver.FindElement(By.LinkText(element));
+                //    executor?.ExecuteScript("arguments[0].click();", webElement);
+                //}
+                //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
+                //{
+                //    webElement = driver.FindElement(By.CssSelector(element));
+                //    executor?.ExecuteScript("arguments[0].click();", webElement);
                     
-                }
-                if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                {
-                    webElement = driver.FindElement(By.XPath(element));
-                    executor?.ExecuteScript("arguments[0].click();", webElement);
-                }
+                //}
+                //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
+                //{
+                //    webElement = driver.FindElement(By.XPath(element));
+                //    executor?.ExecuteScript("arguments[0].click();", webElement);
+                //}
                 if (webElement != null) str = "Clicked " + webElement.Text;
                 //str = "Clicked " + SeleniumGetMethods.GetInputValue(element, elementType);
+                MethodSuccess = true;
             }
             catch (Exception e)
             {
+                MethodSuccess = false;
                 str = "JClick Exception." + Environment.NewLine +
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
@@ -267,28 +203,71 @@ namespace SeleniumMetabot
             elementType = Regex.Replace(elementType, @"s", "");
             try
             {
+                Navigation.SwitchToDefaultFrame();
                 IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
-                
-                foreach (IWebElement iframe in iframes)
+
+                Click(elementType, element);
+                if (MethodSuccess == false)
                 {
-                    driver.SwitchTo().Frame(iframe);
-                    if (Regex.IsMatch(Click(elementType, element), @"\bClick Exception\b"))
+                    JClick(elementType, element);
+                    if (MethodSuccess == false)
                     {
-                        str = Click(elementType, element) + Environment.NewLine + Environment.NewLine;
-                    }
-                    else if (Regex.IsMatch(JClick(elementType, element), @"\bJClick Exception\b"))
-                    {
-                        str += JClick(elementType, element) + Environment.NewLine + Environment.NewLine;
-                    }
-                    else if (Regex.IsMatch(Submit(elementType, element), @"\bSubmit Exception\b"))
-                    {
-                        str += JClick(elementType, element) + Environment.NewLine + Environment.NewLine;
+                        Submit(elementType, element);
+                        if (MethodSuccess == false)
+                        {
+                            foreach (IWebElement iframe in iframes)
+                            {
+                                driver.SwitchTo().Frame(iframe);
+                                if (Regex.IsMatch(Click(elementType, element), @"\bClick Exception\b"))
+                                {
+                                    if (Regex.IsMatch(JClick(elementType, element), @"\bJClick Exception\b"))
+                                    {
+                                        if (Regex.IsMatch(Submit(elementType, element), @"\bSubmit Exception\b"))
+                                        {
+                                            str = "iClick Failed.";
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
+
+
+
+
+                //foreach (IWebElement iframe in iframes)
+                //{
+                //    driver.SwitchTo().Frame(iframe);
+                //    if (Regex.IsMatch(Click(elementType, element), @"\bClick Exception\b"))
+                //    {
+                //        if (Regex.IsMatch(JClick(elementType, element), @"\bJClick Exception\b"))
+                //        {
+                //            if (Regex.IsMatch(Submit(elementType, element), @"\bSubmit Exception\b"))
+                //            {
+                //                str = "iClick Failed.";
+                //            }
+                //        }
+                //    }
+                //    //else if (Regex.IsMatch(JClick(elementType, element), @"\bJClick Exception\b"))
+                //    //{
+                //    //    str += JClick(elementType, element) + Environment.NewLine + Environment.NewLine;
+                //    //}
+                //    //else if (Regex.IsMatch(Submit(elementType, element), @"\bSubmit Exception\b"))
+                //    //{
+                //    //    str += Submit(elementType, element) + Environment.NewLine + Environment.NewLine;
+                //    //}
+                //}
+
+
+
+
+                Navigation.SwitchToDefaultFrame();
             }
             catch (Exception e)
             {
+                Navigation.SwitchToDefaultFrame();
                 str = "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
                       "StackTrace:  " + e.StackTrace + Environment.NewLine +

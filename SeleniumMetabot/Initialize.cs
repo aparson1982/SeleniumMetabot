@@ -32,6 +32,11 @@ namespace SeleniumMetabot
         //    return str;
         //}
 
+        public static void InitializeChromeDriver()
+        {
+            InitializeDriver();
+        }
+
         public static string OpenUrl(string url)
         {
             string str = string.Empty;

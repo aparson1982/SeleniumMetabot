@@ -11,6 +11,8 @@ namespace SeleniumMetabot
 {
     public class SeleniumProperties
     {
+        internal static bool MethodSuccess { get; set; } = true;
+
         internal static IWebDriver driver;
         
         internal static void InitializeDriver()
