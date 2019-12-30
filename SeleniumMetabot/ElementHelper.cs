@@ -147,9 +147,9 @@ namespace SeleniumMetabot
                         throw new ArgumentException("The given argument " + elementType + " for elementType is invalid.");
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             
         }

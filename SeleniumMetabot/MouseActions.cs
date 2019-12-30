@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,7 @@ namespace SeleniumMetabot
             catch (Exception e)
             {
                 MethodSuccess = false;
-                str = "Click Exception." + Environment.NewLine + 
+                str = Environment.NewLine + "Click Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -62,8 +63,8 @@ namespace SeleniumMetabot
             catch (Exception e)
             {
                 MethodSuccess = false;
-                str = "Submit Exception." + Environment.NewLine + 
-                      "Message:  " + e.Message + Environment.NewLine +
+                str = Environment.NewLine + "Submit Exception." + Environment.NewLine + 
+                    "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException;
@@ -122,7 +123,7 @@ namespace SeleniumMetabot
             catch (Exception e)
             {
                 MethodSuccess = false;
-                str = "RightClick Exception." + Environment.NewLine + 
+                str = Environment.NewLine + "RightClick Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -140,50 +141,15 @@ namespace SeleniumMetabot
             {
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 executor?.ExecuteScript("arguments[0].click();", webElement);
-                //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                //{
-                //    webElement = driver.FindElement(By.Id(element));
-                //    executor?.ExecuteScript("arguments[0].click();", webElement);
-                //}
-                //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                //{
-                //    webElement = driver.FindElement(By.Name(element));
-                //    executor?.ExecuteScript("arguments[0].click();", webElement);
-                //}
-                //if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn") || (elementType.ToLower() == "t") || (elementType.ToLower() == "tag"))
-                //{
-                //    webElement = driver.FindElement(By.TagName(element));
-                //    executor?.ExecuteScript("arguments[0].click();", webElement);
-                //}
-                //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl") || (elementType.ToLower() == "plink"))
-                //{
-                //    webElement = driver.FindElement(By.PartialLinkText(element));
-                //    executor?.ExecuteScript("arguments[0].click();", webElement);
-                //}
-                //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt") || (elementType.ToLower() == "link"))
-                //{
-                //    webElement = driver.FindElement(By.LinkText(element));
-                //    executor?.ExecuteScript("arguments[0].click();", webElement);
-                //}
-                //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                //{
-                //    webElement = driver.FindElement(By.CssSelector(element));
-                //    executor?.ExecuteScript("arguments[0].click();", webElement);
-                    
-                //}
-                //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                //{
-                //    webElement = driver.FindElement(By.XPath(element));
-                //    executor?.ExecuteScript("arguments[0].click();", webElement);
-                //}
+                
                 if (webElement != null) str = "Clicked " + webElement.Text;
-                //str = "Clicked " + SeleniumGetMethods.GetInputValue(element, elementType);
+                
                 MethodSuccess = true;
             }
             catch (Exception e)
             {
                 MethodSuccess = false;
-                str = "JClick Exception." + Environment.NewLine +
+                str = Environment.NewLine + "JClick Exception." + Environment.NewLine +
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -235,49 +201,57 @@ namespace SeleniumMetabot
                     }
                 }
 
-
-
-
-
-                //foreach (IWebElement iframe in iframes)
-                //{
-                //    driver.SwitchTo().Frame(iframe);
-                //    if (Regex.IsMatch(Click(elementType, element), @"\bClick Exception\b"))
-                //    {
-                //        if (Regex.IsMatch(JClick(elementType, element), @"\bJClick Exception\b"))
-                //        {
-                //            if (Regex.IsMatch(Submit(elementType, element), @"\bSubmit Exception\b"))
-                //            {
-                //                str = "iClick Failed.";
-                //            }
-                //        }
-                //    }
-                //    //else if (Regex.IsMatch(JClick(elementType, element), @"\bJClick Exception\b"))
-                //    //{
-                //    //    str += JClick(elementType, element) + Environment.NewLine + Environment.NewLine;
-                //    //}
-                //    //else if (Regex.IsMatch(Submit(elementType, element), @"\bSubmit Exception\b"))
-                //    //{
-                //    //    str += Submit(elementType, element) + Environment.NewLine + Environment.NewLine;
-                //    //}
-                //}
-
-
-
-
-                Navigation.SwitchToDefaultFrame();
             }
             catch (Exception e)
             {
-                Navigation.SwitchToDefaultFrame();
-                str = "Message:  " + e.Message + Environment.NewLine +
+                str = Environment.NewLine + "Error" + Environment.NewLine + 
+                      "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
                       "StackTrace:  " + e.StackTrace + Environment.NewLine +
                       "Inner Exception:  " + e.InnerException;
             }
+            finally
+            {
+                Navigation.SwitchToDefaultFrame();
+            }
 
             return str;
         }
-        //TODO:  Add iClick.  Look into searching all frames and clicking.  Also look into incorporating JClick if Click doesn't work.
+
+
+        public static string SmartClick(string element)
+        {
+            string str = string.Empty;
+            string str2 = string.Empty;
+            Queue<string> eTypesQueue = new Queue<string>();
+            eTypesQueue.Enqueue("id");
+            eTypesQueue.Enqueue("name");
+            eTypesQueue.Enqueue("tagname");
+            eTypesQueue.Enqueue("plt");
+            eTypesQueue.Enqueue("lt");
+            eTypesQueue.Enqueue("css");
+            eTypesQueue.Enqueue("xp");
+            int count = 0;
+
+            while(str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed") || count == 0)
+            {
+                str = iClick(eTypesQueue.Dequeue(), element);
+                str2 += str;
+                count++;
+                if (!eTypesQueue.Any())
+                {
+                    break;
+                }
+            }
+
+            if (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed"))
+            {
+                str = str2;
+            }
+            
+            return str;
+
+        }
+        
     }
 }

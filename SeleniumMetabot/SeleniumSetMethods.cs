@@ -25,52 +25,6 @@ namespace SeleniumMetabot
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 actions.MoveToElement(webElement).Click(webElement).SendKeys(value);
 
-
-                //IWebElement item;
-                
-                //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                //{
-                //    item = driver.FindElement(By.Id(element));
-                //    actions.MoveToElement(item).Click(item).SendKeys(value);
-                //    actions.Perform();
-                //}
-                //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                //{
-                //    item = driver.FindElement(By.Name(element));
-                //    actions.MoveToElement(item).Click(item).SendKeys(value);
-                //    actions.Perform();
-                //}
-                //if ((elementType.ToLower() == "tagname") ||(elementType.ToLower() == "tn"))
-                //{
-                //    item = driver.FindElement(By.TagName(element));
-                //    actions.MoveToElement(item).Click(item).SendKeys(value);
-                //    actions.Perform();
-                //}
-                //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
-                //{
-                //    item = driver.FindElement(By.PartialLinkText(element));
-                //    actions.MoveToElement(item).Click(item).SendKeys(value);
-                //    actions.Perform();
-                //}
-                //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
-                //{
-                //    item = driver.FindElement(By.LinkText(element));
-                //    actions.MoveToElement(item).Click(item).SendKeys(value);
-                //    actions.Perform();
-                //}
-                //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                //{
-                //    item = driver.FindElement(By.CssSelector(element));
-                //    actions.MoveToElement(item).Click(item).SendKeys(value);
-                //    actions.Perform();
-                //}
-                //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                //{
-                //    item = driver.FindElement(By.XPath(element));
-                //    actions.MoveToElement(item).Click(item).SendKeys(value);
-                //    actions.Perform();
-                //}
-
                 string elementValue = SeleniumGetMethods.GetInputValue(element, elementType);
 
                 if (value.ToLower() == elementValue.ToLower())
@@ -106,35 +60,7 @@ namespace SeleniumMetabot
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 webElement.SendKeys(value);
 
-                //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                //{
-                //    driver.FindElement(By.Id(element)).SendKeys(value);
-                //}
-                //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                //{
-                //    driver.FindElement(By.Name(element)).SendKeys(value);
-                //}
-                //if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
-                //{
-                //    driver.FindElement(By.TagName(element)).SendKeys(value);
-                //}
-                //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
-                //{
-                //    driver.FindElement(By.PartialLinkText(element)).SendKeys(value);
-                //}
-                //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
-                //{
-                //    driver.FindElement(By.LinkText(element)).SendKeys(value);
-                //}
-                //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                //{
-                //    driver.FindElement(By.CssSelector(element)).SendKeys(value);
-                //}
-                //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                //{
-                //    driver.FindElement(By.XPath(element)).SendKeys(value);
-                //}
-
+                
                 string elementValue = SeleniumGetMethods.GetInputValue(element, elementType);
 
                 MethodSuccess = true;
