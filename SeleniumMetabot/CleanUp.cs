@@ -14,6 +14,7 @@ namespace SeleniumMetabot
         public static void Demolish()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }

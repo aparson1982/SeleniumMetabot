@@ -18,7 +18,7 @@ namespace SeleniumMetabot
                 IAlert alert = driver.SwitchTo().Alert();
                 return true;
             }
-            catch (NoAlertPresentException e)
+            catch (NoAlertPresentException)
             {
                 return false;
             }

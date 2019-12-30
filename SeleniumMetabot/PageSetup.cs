@@ -15,6 +15,11 @@ namespace SeleniumMetabot
         {
             driver.Manage().Window.Maximize();
         }
+
+        public static void DefaultZoom()
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript("document.body.style.zoom'100%';");
+        }
         //TODO:  Create methods for Maximize, Minimize, Resize?, Zoom, etc
     }
 }

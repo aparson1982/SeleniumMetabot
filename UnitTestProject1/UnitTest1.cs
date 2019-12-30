@@ -52,7 +52,7 @@ namespace UnitTestProject1
             Console.WriteLine("BolNumber:  " + SeleniumGetMethods.iGetValue("id", "bolNbr"));
             Console.WriteLine(SeleniumSetMethods.iEnterText("id", "bolNbr", Keys.Enter));
 
-            Console.WriteLine(ElementHelper.Wait("id", "bolDate", 15));
+            Console.WriteLine(ElementHelper.WaitDisplayed("id", "bolDate", 15));
             Console.WriteLine(SeleniumSetMethods.iEnterText("id", "bolDate", bolDate));
             //Console.WriteLine(SeleniumSetMethods.iEnterText("id", "bolDate", Keys.Enter));
 

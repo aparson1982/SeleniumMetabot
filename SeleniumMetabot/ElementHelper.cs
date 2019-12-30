@@ -24,7 +24,7 @@ namespace SeleniumMetabot
         //    return driver.FindElement(by);
         //}
 
-        public static string Wait(string elementType, string element, int timeoutInSeconds)
+        public static string WaitDisplayed(string elementType, string element, int timeoutInSeconds)
         {
             string str = string.Empty;
             elementType = Regex.Replace(elementType, @"s", "");
@@ -34,9 +34,38 @@ namespace SeleniumMetabot
                 wait.Until<IWebElement>((d) =>
                 {
                     IWebElement webElement = ElementHelper.WebElement(elementType, element);
-                    if (webElement.Displayed && webElement.Enabled || webElement.GetAttribute("aria-disabled") == null)
+                    if (webElement.Displayed || webElement.GetAttribute("aria-disabled") == null)
                     {
                        return webElement;
+                    }
+                    throw new TimeoutException("Timed out.");
+
+                });
+                return str;
+            }
+            catch (Exception e)
+            {
+                str = "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException;
+            }
+            return str;
+        }
+
+        public static string WaitEnabled(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                wait.Until<IWebElement>((d) =>
+                {
+                    IWebElement webElement = ElementHelper.WebElement(elementType, element);
+                    if (webElement.Enabled || webElement.GetAttribute("aria-disabled") == null)
+                    {
+                        return webElement;
                     }
                     throw new TimeoutException("Timed out.");
 
