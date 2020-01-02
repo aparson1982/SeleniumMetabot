@@ -48,13 +48,14 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
+                ScreenShot.TakeScreenShot();
                 str = "Message:  " + e.Message + Environment.NewLine +
-                                    "Source:  " + e.Source + Environment.NewLine +
-                                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                                    "Target Site:  " + e.TargetSite + Environment.NewLine +
-                                    "Help Link:  " + e.HelpLink + Environment.NewLine +
-                                    "Data:  " + e.Data;
+                      "Source:  " + e.Source + Environment.NewLine +
+                      "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                      "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                      "Target Site:  " + e.TargetSite + Environment.NewLine +
+                      "Help Link:  " + e.HelpLink + Environment.NewLine +
+                      "Data:  " + e.Data;
             }
             return str;
         }

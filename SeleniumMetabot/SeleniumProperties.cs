@@ -19,6 +19,20 @@ namespace SeleniumMetabot
         {
             driver = new ChromeDriver();
         }
+
+
+        private static string _Path;
+        public static string Path
+        {
+            get { return _Path ?? String.Empty; }
+            set
+            {
+                if (value == null)
+                {
+                    _Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                }
+            }
+        }
         //internal static NgWebDriver ngDriver { get; set; }
     }
 }

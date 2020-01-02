@@ -25,11 +25,13 @@ namespace SeleniumMetabot
             }
             catch(Exception e)
             {
+                ScreenShot.TakeScreenShot();
                 MethodSuccess = false;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
             }
             return str;
         }
@@ -47,11 +49,13 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
+                ScreenShot.TakeScreenShot();
                 MethodSuccess = false;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
             }
             return str;
         }
@@ -69,75 +73,28 @@ namespace SeleniumMetabot
                 GetInputValue(elementType, element);
                 if (MethodSuccess == false)
                 {
-                    if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
+                    foreach (IWebElement iframe in iframes)
                     {
-
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.Id(element)).GetAttribute("value");
-                        }
-
+                        driver.SwitchTo().Frame(iframe);
+                        str = GetInputValue(elementType, element);
                     }
-                    if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.Name(element)).GetAttribute("value");
-                        }
-                    }
-                    if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.TagName(element)).GetAttribute("value");
-                        }
-                    }
-                    if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.PartialLinkText(element)).GetAttribute("value");
-                        }
-                    }
-                    if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.LinkText(element)).GetAttribute("value");
-                        }
-                    }
-                    if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.CssSelector(element)).GetAttribute("value");
-                        }
-                    }
-                    if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.CssSelector(element)).GetAttribute("value");
-                        }
-                    }
+                    
                 }
 
-                Navigation.SwitchToDefaultFrame();
             }
             catch (Exception e)
             {
-                Navigation.SwitchToDefaultFrame();
-                str = "Message:  " + e.Message + Environment.NewLine +
+                ScreenShot.TakeScreenShot();
+                str = "Error:  " + Environment.NewLine + 
+                    "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
+            }
+            finally
+            {
+                Navigation.SwitchToDefaultFrame();
             }
             return str;
         }
@@ -156,77 +113,99 @@ namespace SeleniumMetabot
                 GetInputValue(elementType, element);
                 if (MethodSuccess == false)
                 {
-                    if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
+                    foreach (IWebElement iframe in iframes)
                     {
-
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.Id(element)).Text;
-                        }
-
+                        driver.SwitchTo().Frame(iframe);
+                        str = GetText(elementType, element);
                     }
-                    if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.Name(element)).Text;
-                        }
-                    }
-                    if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.TagName(element)).Text;
-                        }
-                    }
-                    if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            driver.FindElement(By.PartialLinkText(element)).GetAttribute("value");
-                        }
-                    }
-                    if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.LinkText(element)).Text;
-                        }
-                    }
-                    if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.CssSelector(element)).Text;
-                        }
-                    }
-                    if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                    {
-                        foreach (IWebElement iframe in iframes)
-                        {
-                            driver.SwitchTo().Frame(iframe);
-                            str = driver.FindElement(By.CssSelector(element)).Text;
-                        }
-                    }
+                    
                 }
 
-                Navigation.SwitchToDefaultFrame();
             }
             catch (Exception e)
             {
-                Navigation.SwitchToDefaultFrame();
+                ScreenShot.TakeScreenShot();
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
+            }
+            finally
+            {
+                Navigation.SwitchToDefaultFrame();
             }
             return str;
+        }
+
+
+        public static string SmartGetValue(string element)
+        {
+            string str = string.Empty;
+            string str2 = string.Empty;
+            Queue<string> eTypesQueue = new Queue<string>();
+            eTypesQueue.Enqueue("id");
+            eTypesQueue.Enqueue("name");
+            eTypesQueue.Enqueue("tagname");
+            eTypesQueue.Enqueue("plt");
+            eTypesQueue.Enqueue("lt");
+            eTypesQueue.Enqueue("css");
+            eTypesQueue.Enqueue("xp");
+            int count = 0;
+
+            while (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed") || count == 0)
+            {
+                str = iGetValue(eTypesQueue.Dequeue(), element);
+                str2 += str;
+                count++;
+                if (!eTypesQueue.Any())
+                {
+                    break;
+                }
+            }
+
+            if (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed"))
+            {
+                str = str2;
+            }
+
+            return str;
+
+        }
+
+
+        public static string SmartGetText(string element)
+        {
+            string str = string.Empty;
+            string str2 = string.Empty;
+            Queue<string> eTypesQueue = new Queue<string>();
+            eTypesQueue.Enqueue("id");
+            eTypesQueue.Enqueue("name");
+            eTypesQueue.Enqueue("tagname");
+            eTypesQueue.Enqueue("plt");
+            eTypesQueue.Enqueue("lt");
+            eTypesQueue.Enqueue("css");
+            eTypesQueue.Enqueue("xp");
+            int count = 0;
+
+            while (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed") || count == 0)
+            {
+                str = iGetText(eTypesQueue.Dequeue(), element);
+                str2 += str;
+                count++;
+                if (!eTypesQueue.Any())
+                {
+                    break;
+                }
+            }
+
+            if (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed"))
+            {
+                str = str2;
+            }
+
+            return str;
+
         }
     }
 }

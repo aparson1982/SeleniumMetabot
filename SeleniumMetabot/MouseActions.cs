@@ -33,12 +33,14 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
+                ScreenShot.TakeScreenShot();
                 MethodSuccess = false;
                 str = Environment.NewLine + "Click Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
             }
             return str;
         }
@@ -62,12 +64,14 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
+                ScreenShot.TakeScreenShot();
                 MethodSuccess = false;
                 str = Environment.NewLine + "Submit Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
             }
             return str;
         }
@@ -82,52 +86,20 @@ namespace SeleniumMetabot
             {
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 actions.ContextClick(webElement).Perform();
-                //if ((elementType.ToLower().Trim(' ') == "id") || (elementType.ToLower().Trim(' ') == "i"))
-                //{
-                //    webElement = driver.FindElement(By.Id(element));
-                //    actions.ContextClick(webElement).Perform();
-                //}
-                //if ((elementType.ToLower() == "name") || (elementType.ToLower().Trim(' ') == "n"))
-                //{
-                //    webElement = driver.FindElement(By.Name(element));
-                //    actions.ContextClick(webElement).Perform();
-                //}
-                //if ((elementType.ToLower() == "tagname") || (elementType.ToLower() == "tn") || (elementType.ToLower() == "t") || (elementType.ToLower() == "tag"))
-                //{
-                //    webElement = driver.FindElement(By.TagName(element));
-                //    actions.ContextClick(webElement).Perform();
-                //}
-                //if ((elementType.ToLower() == "partiallinktext") || (elementType.ToLower() == "plt") || (elementType.ToLower() == "pl") || (elementType.ToLower() == "plink"))
-                //{
-                //    webElement = driver.FindElement(By.PartialLinkText(element));
-                //    actions.ContextClick(webElement).Perform();
-                //}
-                //if ((elementType.ToLower() == "linktext") || (elementType.ToLower() == "lt") || (elementType.ToLower() == "link"))
-                //{
-                //    webElement = driver.FindElement(By.LinkText(element));
-                //    actions.ContextClick(webElement).Perform();
-                //}
-                //if ((elementType.ToLower() == "cssselector") || (elementType.ToLower() == "csss") || (elementType.ToLower() == "csselector") || (elementType.ToLower() == "cselector") || (elementType.ToLower() == "css"))
-                //{
-                //    webElement = driver.FindElement(By.CssSelector(element));
-                //    actions.ContextClick(webElement).Perform();
-                //}
-                //if ((elementType.ToLower() == "xpath") || (elementType.ToLower() == "xp") || (elementType.ToLower() == "x"))
-                //{
-                //    webElement = driver.FindElement(By.XPath(element));
-                //    actions.ContextClick(webElement).Perform();
-                //}
+                
                 if (webElement != null) str = "Clicked " + webElement.Text;
                 MethodSuccess = true;
             }
             catch (Exception e)
             {
+                ScreenShot.TakeScreenShot();
                 MethodSuccess = false;
                 str = Environment.NewLine + "RightClick Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
             }
             return str;
         }
@@ -148,12 +120,14 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
+                ScreenShot.TakeScreenShot();
                 MethodSuccess = false;
                 str = Environment.NewLine + "JClick Exception." + Environment.NewLine +
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException;
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
             }
             return str;
         }
@@ -204,11 +178,14 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
+
+                ScreenShot.TakeScreenShot();
                 str = Environment.NewLine + "Error" + Environment.NewLine + 
                       "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
                       "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                      "Inner Exception:  " + e.InnerException;
+                      "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element;
             }
             finally
             {

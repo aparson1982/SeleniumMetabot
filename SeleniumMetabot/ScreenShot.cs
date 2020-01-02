@@ -9,9 +9,16 @@ namespace SeleniumMetabot
 {
     public class ScreenShot : SeleniumProperties
     {
-        public static string TakeScreenShot(string fqpn)
+        
+        public static string TakeScreenShot(string fqpn = null)
         {
             string str = string.Empty;
+            if (string.IsNullOrEmpty(fqpn))
+            {
+                fqpn = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string myUniqueFileName = $@"\Image{DateTime.Now.Ticks}.png";
+                fqpn = fqpn + myUniqueFileName;
+            }
             try
             {
                 Screenshot image = ((ITakesScreenshot)driver).GetScreenshot();
@@ -22,9 +29,9 @@ namespace SeleniumMetabot
             catch (Exception e)
             {
                 str = "Message:  " + e.Message + Environment.NewLine +
-                                    "Source:  " + e.Source + Environment.NewLine +
-                                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                                    "Inner Exception:  " + e.InnerException;
+                      "Source:  " + e.Source + Environment.NewLine +
+                      "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                      "Inner Exception:  " + e.InnerException;
             }
             return str;
         }

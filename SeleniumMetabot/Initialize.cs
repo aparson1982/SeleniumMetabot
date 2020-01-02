@@ -12,26 +12,6 @@ namespace SeleniumMetabot
     public class Initialize : SeleniumProperties
     {
 
-        //public static string InitializeChromeDriver()
-        //{
-        //    string str = string.Empty;
-        //    try
-        //    {
-        //        _ = driver;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        str = "Message:  " + e.Message + Environment.NewLine +
-        //            "Source:  " + e.Source + Environment.NewLine +
-        //            "StackTrace:  " + e.StackTrace + Environment.NewLine +
-        //            "Inner Exception:  " + e.InnerException + Environment.NewLine +
-        //            "Target Site:  " + e.TargetSite + Environment.NewLine +
-        //            "Help Link:  " + e.HelpLink + Environment.NewLine +
-        //            "Data:  " + e.Data;
-        //    }
-        //    return str;
-        //}
-
         public static void InitializeChromeDriver()
         {
             InitializeDriver();
