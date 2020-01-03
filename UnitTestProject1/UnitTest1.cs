@@ -86,8 +86,9 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void SmartClickTest()
+        public void SClickTest()
         {
+            SeleniumProperties.doTakeScreenshot = true;
             Initialize.OpenUrl("http://sw72cseapqa:8080/CSWI/login/login.jsp");
             PageSetup.MaximizeWindow();
             Thread.Sleep(10000);
@@ -97,8 +98,8 @@ namespace UnitTestProject1
             Console.WriteLine(SeleniumUtilities.ShowMessage("PWD:  " + SeleniumGetMethods.iGetValue("xp", "//input[@name='password']")));
             MouseActions.Submit("xp", "//input[@class='button']");
 
-            Console.WriteLine(SeleniumUtilities.ShowMessage(MouseActions.SmartClick("//body/nav[@class='navbar fixed-top navbar-light']/table[@id='app_main_menu_table']/tbody/tr/td[@class='appHeader']/table[@class='appHeader']/tbody/tr/td/div[@id='mainMenuDiv']/ul/li[7]/a[1]")));
-            Console.WriteLine(SeleniumUtilities.ShowMessage(MouseActions.SmartClick("//li[7]//ul[1]//li[5]//a[1]")));
+            Console.WriteLine(SeleniumUtilities.ShowMessage(MouseActions.iClick("xp","//body/nav[@class='navbar fixed-top navbar-light']/table[@id='app_main_menu_table']/tbody/tr/td[@class='appHeader']/table[@class='appHeader']/tbody/tr/td/div[@id='mainMenuDiv']/ul/li[7]/a[1]")));
+            Console.WriteLine(SeleniumUtilities.ShowMessage(MouseActions.iClick("xp","//li[7]//ul[1]//li[5]//a[1]")));
 
             string bolNumber = "989039";
             string bolDate = "12/09/2019";
@@ -112,16 +113,17 @@ namespace UnitTestProject1
 
             Console.WriteLine(SeleniumUtilities.ShowMessage(Navigation.SwitchFrames("name", "frame2")));
             Console.WriteLine(SeleniumUtilities.ShowMessage(ElementHelper.WaitTilReady("id", "bolDate", 15)));
-            //Console.WriteLine(SeleniumUtilities.ShowMessage(SeleniumSetMethods.iEnterText("id", "bolDate", bolDate)));
-            Console.WriteLine(SeleniumUtilities.ShowMessage(SeleniumSetMethods.iEnterText(bolDate, "id", "bolDate")));
+            Console.WriteLine(SeleniumUtilities.ShowMessage(SeleniumSetMethods.iEnterText("id", "bolDate", bolDate)));
+            //Console.WriteLine(SeleniumUtilities.ShowMessage(SeleniumSetMethods.iEnterText(bolDate, "id", "bolDate")));
 
-            Console.WriteLine(SeleniumUtilities.ShowMessage(MouseActions.SmartClick("//body[@class='tundra']//td//td[1]//input[1]")));
+            Console.WriteLine(SeleniumUtilities.ShowMessage(MouseActions.iClick("xp","//body[@class='tundra']//td//td[1]//input[1]")));
             Console.WriteLine(SeleniumUtilities.ShowMessage(Navigation.SwitchFrames("name", "frame2")));
+
             if (ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]").Equals("True"))
             {
                 Console.WriteLine(ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]"));
                 //Console.WriteLine(MouseActions.JClick("xp", "//span[contains(text(),'Ok')]"));
-                Console.WriteLine(MouseActions.SmartClick("//span[contains(text(),'Ok')]"));
+                Console.WriteLine(MouseActions.iClick("xp","//span[contains(text(),'Ok')]"));
             }
 
 

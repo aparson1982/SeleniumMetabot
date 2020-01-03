@@ -25,7 +25,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = "There was an exception switching Frames." + Environment.NewLine + Environment.NewLine +
                       "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
@@ -58,7 +61,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = "There was an exception switching Frames." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +

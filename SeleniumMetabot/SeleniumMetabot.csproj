@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="AlertHandler.cs" />
     <Compile Include="ElementHelper.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="MouseActions.cs" />
     <Compile Include="CleanUp.cs" />
     <Compile Include="Initialize.cs" />

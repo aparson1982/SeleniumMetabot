@@ -31,11 +31,14 @@ namespace SeleniumMetabot
                     throw new TimeoutException("Timed out.");
 
                 });
-                return str;
+                str = "true";
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -62,11 +65,14 @@ namespace SeleniumMetabot
                     throw new TimeoutException("Timed out.");
 
                 });
-                return str;
+                str = "true";
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -86,18 +92,21 @@ namespace SeleniumMetabot
                 wait.Until<IWebElement>((d) =>
                 {
                     IWebElement webElement = ElementHelper.WebElement(elementType, element);
-                    if (webElement.Enabled || webElement.Displayed || webElement.GetAttribute("aria-disabled") == null)
+                    if (webElement.Enabled && webElement.Displayed || webElement.GetAttribute("aria-disabled") == null)
                     {
                         return webElement;
                     }
                     throw new TimeoutException("Timed out.");
 
                 });
-                return str;
-            }
+                str = "true";
+             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -174,7 +183,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 throw e;
             }
             

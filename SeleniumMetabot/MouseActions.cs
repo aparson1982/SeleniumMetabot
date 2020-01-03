@@ -33,7 +33,11 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+
                 MethodSuccess = false;
                 str = Environment.NewLine + "Click Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
@@ -64,7 +68,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 MethodSuccess = false;
                 str = Environment.NewLine + "Submit Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
@@ -92,7 +99,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 MethodSuccess = false;
                 str = Environment.NewLine + "RightClick Exception." + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
@@ -120,7 +130,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 MethodSuccess = false;
                 str = Environment.NewLine + "JClick Exception." + Environment.NewLine +
                     "Message:  " + e.Message + Environment.NewLine +
@@ -179,7 +192,10 @@ namespace SeleniumMetabot
             catch (Exception e)
             {
 
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = Environment.NewLine + "Error" + Environment.NewLine + 
                       "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
@@ -196,39 +212,39 @@ namespace SeleniumMetabot
         }
 
 
-        public static string SmartClick(string element)
-        {
-            string str = string.Empty;
-            string str2 = string.Empty;
-            Queue<string> eTypesQueue = new Queue<string>();
-            eTypesQueue.Enqueue("id");
-            eTypesQueue.Enqueue("name");
-            eTypesQueue.Enqueue("tagname");
-            eTypesQueue.Enqueue("plt");
-            eTypesQueue.Enqueue("lt");
-            eTypesQueue.Enqueue("css");
-            eTypesQueue.Enqueue("xp");
-            int count = 0;
+        //public static string SmartClick(string element)
+        //{
+        //    string str = string.Empty;
+        //    string str2 = string.Empty;
+        //    Queue<string> eTypesQueue = new Queue<string>();
+        //    eTypesQueue.Enqueue("id");
+        //    eTypesQueue.Enqueue("name");
+        //    eTypesQueue.Enqueue("tagname");
+        //    eTypesQueue.Enqueue("plt");
+        //    eTypesQueue.Enqueue("lt");
+        //    eTypesQueue.Enqueue("css");
+        //    eTypesQueue.Enqueue("xp");
+        //    int count = 0;
 
-            while(str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed") || count == 0)
-            {
-                str = iClick(eTypesQueue.Dequeue(), element);
-                str2 += str;
-                count++;
-                if (!eTypesQueue.Any())
-                {
-                    break;
-                }
-            }
+        //    while(str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed") || count == 0)
+        //    {
+        //        str = iClick(eTypesQueue.Dequeue(), element);
+        //        str2 += str;
+        //        count++;
+        //        if (!eTypesQueue.Any())
+        //        {
+        //            break;
+        //        }
+        //    }
 
-            if (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed"))
-            {
-                str = str2;
-            }
+        //    if (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed"))
+        //    {
+        //        str = str2;
+        //    }
             
-            return str;
+        //    return str;
 
-        }
+        //}
         
     }
 }

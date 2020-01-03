@@ -12,6 +12,7 @@ namespace SeleniumMetabot
     public class SeleniumProperties
     {
         internal static bool MethodSuccess { get; set; } = true;
+        public static bool doTakeScreenshot { get; set; } = false;
 
         internal static IWebDriver driver;
         

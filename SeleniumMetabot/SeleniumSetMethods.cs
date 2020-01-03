@@ -41,7 +41,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -80,7 +83,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 MethodSuccess = false;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
@@ -133,7 +139,10 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
-                ScreenShot.TakeScreenShot();
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
