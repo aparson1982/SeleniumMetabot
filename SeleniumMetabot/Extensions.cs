@@ -15,9 +15,6 @@ namespace SeleniumMetabot
             return text.IndexOf(value, stringComparison) >= 0;
         }
 
-        public static void DeleteOldFiles(string dirName, int days = 30)
-        {
-          Directory.GetFiles(dirName).Select(f => new FileInfo(f)).Where(f => f.LastAccessTime < DateTime.Now.AddDays(-days)).ToList().ForEach(f => f.Delete());
-        }
+        
     }
 }

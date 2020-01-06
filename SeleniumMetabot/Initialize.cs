@@ -24,7 +24,7 @@ namespace SeleniumMetabot
             {
                 InitializeDriver();
                 driver.Url = url;
-                str = SeleniumUtilities.MethodName() + ":  " + "Opened the URL " + url;
+                str = "Opened the URL " + url;
             }
             catch (Exception e)
             {
@@ -34,9 +34,9 @@ namespace SeleniumMetabot
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
                     "Target Site:  " + e.TargetSite + Environment.NewLine +
                     "Help Link:  " + e.HelpLink + Environment.NewLine +
-                    "Data:  " + e.Data;
+                    "Data:  " + e.Data + Environment.NewLine;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
         public static void NavigateToUrl(string url)

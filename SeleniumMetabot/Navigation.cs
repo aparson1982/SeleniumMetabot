@@ -22,6 +22,7 @@ namespace SeleniumMetabot
                 Actions actions = new Actions(driver);
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 actions.MoveToElement(webElement);
+                str = "Scrolled to the element " + element + Environment.NewLine;
             }
             catch (Exception e)
             {
@@ -29,14 +30,14 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
-                str = "There was an exception switching Frames." + Environment.NewLine + Environment.NewLine +
+                str = "There was an exception switching Frames." + Environment.NewLine +
                       "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
                       "StackTrace:  " + e.StackTrace + Environment.NewLine +
                       "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
             
             
                        //TODO Finish Writing the rest of the method
@@ -54,10 +55,10 @@ namespace SeleniumMetabot
             elementType = Regex.Replace(elementType, @"s", "");
             try
             {
-                
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 driver.SwitchTo().Frame(webElement);
- 
+                str = "Switched to the iframe element " + element + Environment.NewLine;
+
             }
             catch (Exception e)
             {
@@ -72,7 +73,7 @@ namespace SeleniumMetabot
                     "Inner Exception:  " + e.InnerException + Environment.NewLine + 
                     "Parameters:  elementType = " + elementType + " | element = " + element ;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
         /// <summary>

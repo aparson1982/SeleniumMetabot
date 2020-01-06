@@ -29,11 +29,11 @@ namespace SeleniumMetabot
 
                 if (!elementValue.Equals(value))
                 {
-                    str = SeleniumUtilities.MethodName() + ":  " + "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
+                    str = "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect." + Environment.NewLine;
                 }
                 else
                 {
-                    str = SeleniumUtilities.MethodName() + ":  " + "Entered " + value + " into element [" + elementType + ": " + element + "]";
+                    str = "Entered " + value + " into element [" + elementType + ": " + element + "]" + Environment.NewLine;
                 }
 
                 //TODO:  Validate value that is in textbox and return success or not
@@ -49,9 +49,9 @@ namespace SeleniumMetabot
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element + " | value = " + value;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + " | value = " + value + Environment.NewLine;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
 
@@ -70,11 +70,11 @@ namespace SeleniumMetabot
 
                 if (!elementValue.Equals(value))
                 {
-                    str = SeleniumUtilities.MethodName() + ":  " + "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
+                    str = "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect." + Environment.NewLine;
                 }
                 else
                 {
-                    str = SeleniumUtilities.MethodName() + ":  " + "Entered " + value + " into element [" + elementType + ": " + element + "]";
+                    str = "Entered " + value + " into element [" + elementType + ": " + element + "]" + Environment.NewLine;
                 }
 
                 MethodSuccess = true;
@@ -92,9 +92,9 @@ namespace SeleniumMetabot
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element + " | value = " + value;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + " | value = " + value + Environment.NewLine;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
 
@@ -125,15 +125,14 @@ namespace SeleniumMetabot
                     
                 }
                 
-
                 string elementValue = SeleniumGetMethods.GetInputValue(elementType, element);
                 if (!elementValue.Equals(value))
                 {
-                    str = SeleniumUtilities.MethodName() + ":  " + "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
+                    str = "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect." + Environment.NewLine;
                 }
                 else
                 {
-                    str = SeleniumUtilities.MethodName() + ":  " + "Entered " + value + " into element [" + elementType + ": " + element + "]";
+                    str = "Entered " + value + " into element [" + elementType + ": " + element + "]" + Environment.NewLine;
                 }
                 
             }
@@ -143,17 +142,17 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
-                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element + " | value = " + value;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + " | value = " + value + Environment.NewLine;
             }
             finally
             {
                 Navigation.SwitchToDefaultFrame();
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
 
         }
 

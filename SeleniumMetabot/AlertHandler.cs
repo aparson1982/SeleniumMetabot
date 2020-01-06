@@ -10,32 +10,64 @@ namespace SeleniumMetabot
 {
     public class AlertHandler : SeleniumProperties
     {
+        private static string alertMsg;
         
         public static bool IsAlertPresent()
         {
             try
             {
                 IAlert alert = driver.SwitchTo().Alert();
+                alertMsg += SeleniumUtilities.MethodName() + ":  " + "Alert Present" + Environment.NewLine;
                 return true;
             }
             catch (NoAlertPresentException)
             {
+                alertMsg += SeleniumUtilities.MethodName() + ":  " + "Alert Not Found." + Environment.NewLine;
                 return false;
             }
         }
 
-        public static void DismissAlert()
+        public static string DismissAlert()
         {
-            if (!IsAlertPresent()) return;
-            IAlert alert = driver.SwitchTo().Alert();
-            alert.Dismiss();
+            if (!IsAlertPresent()) return alertMsg;
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                alert.Dismiss();
+                alertMsg += SeleniumUtilities.MethodName() + ":  " + "Alert Dismissed" + Environment.NewLine;
+            }
+            catch (Exception e)
+            {
+                alertMsg += "Unable to Dismiss the Alert.  " + Environment.NewLine + 
+                            "Message:  " + e.Message + Environment.NewLine +
+                            "Source:  " + e.Source + Environment.NewLine +
+                            "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                            "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+
+            return SeleniumUtilities.MethodName() + ":  " +  alertMsg;
         }
 
-        public static void AcceptAlert()
+        public static string AcceptAlert()
         {
-            if (!IsAlertPresent()) return;
-            IAlert alert = driver.SwitchTo().Alert();
-            alert.Accept();
+            
+            if (!IsAlertPresent()) return alertMsg;
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                alert.Accept();
+                alertMsg += SeleniumUtilities.MethodName() + ":  " + "Alert Accepted" + Environment.NewLine;
+            }
+            catch (Exception e)
+            {
+                alertMsg += "Unable to Accept the Alert.  " + Environment.NewLine +
+                            "Message:  " + e.Message + Environment.NewLine +
+                            "Source:  " + e.Source + Environment.NewLine +
+                            "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                            "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+
+            return SeleniumUtilities.MethodName() + ":  " + alertMsg;
         }
 
         public static string GetAlertText()
@@ -52,13 +84,13 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
-                str = "Message:  " + e.Message + Environment.NewLine +
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
                       "StackTrace:  " + e.StackTrace + Environment.NewLine +
                       "Inner Exception:  " + e.InnerException + Environment.NewLine +
                       "Target Site:  " + e.TargetSite + Environment.NewLine +
                       "Help Link:  " + e.HelpLink + Environment.NewLine +
-                      "Data:  " + e.Data;
+                      "Data:  " + e.Data + Environment.NewLine;
             }
             return str;
         }

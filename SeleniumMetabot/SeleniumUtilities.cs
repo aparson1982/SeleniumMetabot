@@ -16,7 +16,7 @@ namespace SeleniumMetabot
         
         public static string ShowMessage(string message, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string caller = null)
         {
-            return(Environment.NewLine + Environment.NewLine + message + " at line " + lineNumber + " (" + caller + ") " + Environment.NewLine);
+            return(" at line " + lineNumber + " (" + caller + ") " + Environment.NewLine);
         }
 
         public static string LineNumber([CallerLineNumber] int lineNumber = 0)

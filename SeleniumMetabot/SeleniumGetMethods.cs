@@ -34,7 +34,7 @@ namespace SeleniumMetabot
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
             return str;
         }
@@ -61,7 +61,7 @@ namespace SeleniumMetabot
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
             return str;
         }
@@ -99,7 +99,7 @@ namespace SeleniumMetabot
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
             finally
             {
@@ -141,7 +141,7 @@ namespace SeleniumMetabot
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
             finally
             {
@@ -151,73 +151,5 @@ namespace SeleniumMetabot
         }
 
 
-        public static string SmartGetValue(string element)
-        {
-            string str = string.Empty;
-            string str2 = string.Empty;
-            Queue<string> eTypesQueue = new Queue<string>();
-            eTypesQueue.Enqueue("id");
-            eTypesQueue.Enqueue("name");
-            eTypesQueue.Enqueue("tagname");
-            eTypesQueue.Enqueue("plt");
-            eTypesQueue.Enqueue("lt");
-            eTypesQueue.Enqueue("css");
-            eTypesQueue.Enqueue("xp");
-            int count = 0;
-
-            while (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed") || count == 0)
-            {
-                str = iGetValue(eTypesQueue.Dequeue(), element);
-                str2 += str;
-                count++;
-                if (!eTypesQueue.Any())
-                {
-                    break;
-                }
-            }
-
-            if (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed"))
-            {
-                str = str2;
-            }
-
-            return str;
-
-        }
-
-
-        public static string SmartGetText(string element)
-        {
-            string str = string.Empty;
-            string str2 = string.Empty;
-            Queue<string> eTypesQueue = new Queue<string>();
-            eTypesQueue.Enqueue("id");
-            eTypesQueue.Enqueue("name");
-            eTypesQueue.Enqueue("tagname");
-            eTypesQueue.Enqueue("plt");
-            eTypesQueue.Enqueue("lt");
-            eTypesQueue.Enqueue("css");
-            eTypesQueue.Enqueue("xp");
-            int count = 0;
-
-            while (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed") || count == 0)
-            {
-                str = iGetText(eTypesQueue.Dequeue(), element);
-                str2 += str;
-                count++;
-                if (!eTypesQueue.Any())
-                {
-                    break;
-                }
-            }
-
-            if (str.Contains("Error") || str.Contains("Exception") || str.Contains("Failed"))
-            {
-                str = str2;
-            }
-
-            return str;
-
-        }
     }
 }
