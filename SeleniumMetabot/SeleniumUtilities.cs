@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -43,6 +44,14 @@ namespace SeleniumMetabot
         {
             return driver.FindElements(By.XPath("//iframe")).Count();
         }
-        
+
+        public static string Invoke(Action action)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            action.Invoke();
+            stopwatch.Stop();
+            return (stopwatch.Elapsed.ToString() + "  |  " + action);
+        }
+
     }
 }

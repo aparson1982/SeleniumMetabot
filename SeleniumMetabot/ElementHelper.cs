@@ -13,7 +13,15 @@ namespace SeleniumMetabot
 {
     public class ElementHelper : SeleniumProperties
     {
+        private static string elementHelperMessages;
         
+        /// <summary>
+        /// Implicitly waits for the element to be Displayed.
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
         public static string WaitDisplayed(string elementType, string element, int timeoutInSeconds)
         {
             string str = string.Empty;
@@ -48,6 +56,13 @@ namespace SeleniumMetabot
             return str;
         }
 
+        /// <summary>
+        /// Implicitly waits for the element to be Enabled.
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
         public static string WaitEnabled(string elementType, string element, int timeoutInSeconds)
         {
             string str = string.Empty;
@@ -82,6 +97,13 @@ namespace SeleniumMetabot
             return str;
         }
 
+        /// <summary>
+        /// Implicit wait that waits for the element to be Enabled and Displayed
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
         public static string WaitTilReady(string elementType, string element, int timeoutInSeconds)
         {
             string str = string.Empty;
@@ -92,7 +114,7 @@ namespace SeleniumMetabot
                 wait.Until<IWebElement>((d) =>
                 {
                     IWebElement webElement = ElementHelper.WebElement(elementType, element);
-                    if (webElement.Enabled && webElement.Displayed || webElement.GetAttribute("aria-disabled") == null)
+                    if (webElement.Enabled && webElement.Displayed || webElement.GetAttribute("aria-disabled") == null && webElement.Displayed)
                     {
                         return webElement;
                     }
@@ -114,6 +136,82 @@ namespace SeleniumMetabot
                     "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
             return str;
+        }
+
+
+        private static string ExplicitWait(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                WaitForWebElement(elementType, element, timeoutInSeconds);
+                if (MethodSuccess == true)
+                {
+                    str = "Successfully found the element:  " + element + Environment.NewLine;
+                }
+                else
+                {
+                    str = elementHelperMessages;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                MethodSuccess = false;
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
+
+        /// <summary>
+        /// Use the Explicit Wait to cover a broader number of conditions.  
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
+        public static string iExplicitWait(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                Navigation.SwitchToDefaultFrame();
+                IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
+
+                str = ExplicitWait(elementType, element, timeoutInSeconds);
+                if (MethodSuccess == false)
+                {
+                    foreach (IWebElement iframe in iframes)
+                    {
+                        driver.SwitchTo().Frame(iframe);
+                        str = "Attempting to find in other frames...  " + ExplicitWait(elementType, element, timeoutInSeconds) + Environment.NewLine;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
 
@@ -155,6 +253,83 @@ namespace SeleniumMetabot
             {
                 return 0;
             }
+        }
+
+        internal static IWebElement WaitForWebElement(string elementType, string element, int timeoutInSeconds)
+        {
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                switch (WebElementHelper(elementType, element))
+                {
+                    case 1:
+                        IWebElement myDynamicElement = wait.Until<IWebElement>((d) =>
+                        {
+                            return d.FindElement(By.Id(element));
+                        });
+                        MethodSuccess = true;
+                        return myDynamicElement;
+                    case 2:
+                        myDynamicElement = wait.Until<IWebElement>((d) =>
+                        {
+                            return d.FindElement(By.Name(element));
+                        });
+                        MethodSuccess = true;
+                        return myDynamicElement;
+                    case 3:
+                        myDynamicElement = wait.Until<IWebElement>((d) =>
+                        {
+                            return d.FindElement(By.TagName(element));
+                        });
+                        MethodSuccess = true;
+                        return myDynamicElement;
+                    case 4:
+                        myDynamicElement = wait.Until<IWebElement>((d) =>
+                        {
+                            return d.FindElement(By.PartialLinkText(element));
+                        });
+                        MethodSuccess = true;
+                        return myDynamicElement;
+                    case 5:
+                        myDynamicElement = wait.Until<IWebElement>((d) =>
+                        {
+                            return d.FindElement(By.LinkText(element));
+                        });
+                        MethodSuccess = true;
+                        return myDynamicElement;
+                    case 6:
+                        myDynamicElement = wait.Until<IWebElement>((d) =>
+                        {
+                            return d.FindElement(By.CssSelector(element));
+                        });
+                        MethodSuccess = true;
+                        return myDynamicElement;                        
+                    case 7:
+                        myDynamicElement = wait.Until<IWebElement>((d) =>
+                        {
+                            return d.FindElement(By.XPath(element));
+                        });
+                        MethodSuccess = true;
+                        return myDynamicElement;
+                    default:
+                        throw new ArgumentException("The given argument " + elementType + " for elementType is invalid.");
+                }
+                
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                MethodSuccess = false;
+                elementHelperMessages += SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return null;
         }
 
         internal static IWebElement WebElement(string elementType, string element)
