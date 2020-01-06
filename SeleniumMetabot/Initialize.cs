@@ -24,6 +24,7 @@ namespace SeleniumMetabot
             {
                 InitializeDriver();
                 driver.Url = url;
+                str = SeleniumUtilities.MethodName() + ":  " + "Opened the URL " + url;
             }
             catch (Exception e)
             {

@@ -27,7 +27,7 @@ namespace SeleniumMetabot
                 if (webElement != null)
                 {
                     actions.Click(webElement).Perform();
-                    str = "Clicked " + webElement.Text;
+                    str = SeleniumUtilities.MethodName() + ":  " + "Clicked " + element;
                 }
                 MethodSuccess = true;
             }
@@ -62,7 +62,7 @@ namespace SeleniumMetabot
                 if (webElement != null)
                 {
                     webElement.Submit();
-                    str = "Clicked " + webElement.Text;
+                    str = SeleniumUtilities.MethodName() + ":  " + "Clicked " + element;
                 }
                 MethodSuccess = true;
             }
@@ -94,7 +94,7 @@ namespace SeleniumMetabot
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 actions.ContextClick(webElement).Perform();
                 
-                if (webElement != null) str = "Clicked " + webElement.Text;
+                if (webElement != null) str = SeleniumUtilities.MethodName() + ":  " + "Clicked " + element;
                 MethodSuccess = true;
             }
             catch (Exception e)
@@ -124,7 +124,7 @@ namespace SeleniumMetabot
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 executor?.ExecuteScript("arguments[0].click();", webElement);
                 
-                if (webElement != null) str = "Clicked " + webElement.Text;
+                if (webElement != null) str = SeleniumUtilities.MethodName() + ":  " + "Clicked " + element;
                 
                 MethodSuccess = true;
             }
@@ -155,31 +155,48 @@ namespace SeleniumMetabot
         public static string iClick(string elementType, string element)
         {
             string str = string.Empty;
+            string str2 = string.Empty;
             elementType = Regex.Replace(elementType, @"s", "");
             try
             {
                 Navigation.SwitchToDefaultFrame();
                 IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
 
-                Click(elementType, element);
+                str = Click(elementType, element) + Environment.NewLine;
+                str2 = str;
                 if (MethodSuccess == false)
                 {
-                    JClick(elementType, element);
+                    str = JClick(elementType, element) + Environment.NewLine;
+                    str2 += str;
                     if (MethodSuccess == false)
                     {
-                        Submit(elementType, element);
+
+                        str = Submit(elementType, element) + Environment.NewLine;
+                        str2 += str;
                         if (MethodSuccess == false)
                         {
                             foreach (IWebElement iframe in iframes)
                             {
                                 driver.SwitchTo().Frame(iframe);
-                                if (Regex.IsMatch(Click(elementType, element), @"\bClick Exception\b"))
+
+                                string tempString = Click(elementType, element);
+                                str = "Frame: " + iframe.GetAttribute("id") + "  |  " + tempString + Environment.NewLine;
+                                str2 += str;
+                                if (Regex.IsMatch(tempString, @"\bClick Exception\b"))
                                 {
-                                    if (Regex.IsMatch(JClick(elementType, element), @"\bJClick Exception\b"))
+
+                                    tempString = JClick(elementType, element);
+                                    str = "Frame: " + iframe.GetAttribute("id") + "  |  " + tempString + Environment.NewLine;
+                                    str2 += str;
+                                    if (Regex.IsMatch(tempString, @"\bJClick Exception\b"))
                                     {
-                                        if (Regex.IsMatch(Submit(elementType, element), @"\bSubmit Exception\b"))
+
+                                        tempString = Submit(elementType, element);
+                                        str = "Frame: " + iframe.GetAttribute("id") + "  |  " + tempString + Environment.NewLine;
+                                        str2 += str;
+                                        if (Regex.IsMatch(tempString, @"\bSubmit Exception\b"))
                                         {
-                                            str = "iClick Failed.";
+                                            str = "iClick Failed with the following exception(s):  " + Environment.NewLine + str2;
                                         }
                                     }
                                 }
@@ -196,7 +213,7 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
-                str = Environment.NewLine + "Error" + Environment.NewLine + 
+                str = SeleniumUtilities.MethodName() + ":  " + Environment.NewLine + "Error" + Environment.NewLine + 
                       "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
                       "StackTrace:  " + e.StackTrace + Environment.NewLine +

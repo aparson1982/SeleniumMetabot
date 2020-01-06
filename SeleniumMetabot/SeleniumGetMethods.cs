@@ -30,7 +30,7 @@ namespace SeleniumMetabot
                     ScreenShot.TakeScreenShot();
                 }
                 MethodSuccess = false;
-                str = "Message:  " + e.Message + Environment.NewLine +
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
@@ -57,7 +57,7 @@ namespace SeleniumMetabot
                     ScreenShot.TakeScreenShot();
                 }
                 MethodSuccess = false;
-                str = "Message:  " + e.Message + Environment.NewLine +
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
@@ -94,7 +94,7 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
-                str = "Error:  " + Environment.NewLine + 
+                str = SeleniumUtilities.MethodName() + ":  " + "Error:  " + Environment.NewLine + 
                     "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -137,7 +137,7 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
-                str = "Message:  " + e.Message + Environment.NewLine +
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +

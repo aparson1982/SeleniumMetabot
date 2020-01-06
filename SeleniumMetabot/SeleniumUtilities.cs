@@ -18,6 +18,16 @@ namespace SeleniumMetabot
         {
             return(Environment.NewLine + Environment.NewLine + message + " at line " + lineNumber + " (" + caller + ") " + Environment.NewLine);
         }
+
+        public static string LineNumber([CallerLineNumber] int lineNumber = 0)
+        {
+            return (" (" + lineNumber + "):  " );
+        }
+
+        public static string MethodName([CallerMemberName] string caller = null)
+        {
+            return (" (" + caller + ") ");
+        }
         
         public static string PageSourceCode()
         {

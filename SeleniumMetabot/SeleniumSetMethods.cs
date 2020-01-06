@@ -27,13 +27,13 @@ namespace SeleniumMetabot
 
                 string elementValue = SeleniumGetMethods.GetInputValue(elementType, element);
 
-                if (value.ToLower() == elementValue.ToLower())
+                if (!elementValue.Equals(value))
                 {
-                    str = value + " entered successfully.";
+                    str = SeleniumUtilities.MethodName() + ":  " + "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
                 }
                 else
                 {
-                    str = value + " not entered successfully.";
+                    str = SeleniumUtilities.MethodName() + ":  " + "Entered " + value + " into element [" + elementType + ": " + element + "]";
                 }
 
                 //TODO:  Validate value that is in textbox and return success or not
@@ -70,11 +70,11 @@ namespace SeleniumMetabot
 
                 if (!elementValue.Equals(value))
                 {
-                    str = "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
+                    str = SeleniumUtilities.MethodName() + ":  " + "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
                 }
                 else
                 {
-                    str = "Entered " + value + " into element [" + elementType + ": " + element + "]";
+                    str = SeleniumUtilities.MethodName() + ":  " + "Entered " + value + " into element [" + elementType + ": " + element + "]";
                 }
 
                 MethodSuccess = true;
@@ -129,11 +129,11 @@ namespace SeleniumMetabot
                 string elementValue = SeleniumGetMethods.GetInputValue(elementType, element);
                 if (!elementValue.Equals(value))
                 {
-                    str = "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
+                    str = SeleniumUtilities.MethodName() + ":  " + "Warning:  The value entered in the element [" + elementType + ": " + element + "] may be incorrect.";
                 }
                 else
                 {
-                    str = "Entered " + value + " into element [" + elementType + ": " + element + "]";
+                    str = SeleniumUtilities.MethodName() + ":  " + "Entered " + value + " into element [" + elementType + ": " + element + "]";
                 }
                 
             }
@@ -143,7 +143,7 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
-                str = "Message:  " + e.Message + Environment.NewLine +
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
