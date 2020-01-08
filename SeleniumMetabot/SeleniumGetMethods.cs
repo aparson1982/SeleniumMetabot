@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SeleniumMetabot
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class SeleniumGetMethods : SeleniumProperties
     {
         
@@ -66,7 +68,7 @@ namespace SeleniumMetabot
             return str;
         }
 
-        //TODO:  Search all frames for value
+        
         public static string iGetValue(string elementType, string element)
         {
             string str = string.Empty;
@@ -109,7 +111,8 @@ namespace SeleniumMetabot
         }
 
 
-        //TODO:  Search all frames for text
+        
+        
         public static string iGetText(string elementType, string element)
         {
             string str = string.Empty;

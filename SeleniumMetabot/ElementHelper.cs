@@ -263,52 +263,31 @@ namespace SeleniumMetabot
                 switch (WebElementHelper(elementType, element))
                 {
                     case 1:
-                        IWebElement myDynamicElement = wait.Until<IWebElement>((d) =>
-                        {
-                            return d.FindElement(By.Id(element));
-                        });
+                        IWebElement myDynamicElement = wait.Until<IWebElement>((d) => d.FindElement(By.Id(element)));
                         MethodSuccess = true;
                         return myDynamicElement;
                     case 2:
-                        myDynamicElement = wait.Until<IWebElement>((d) =>
-                        {
-                            return d.FindElement(By.Name(element));
-                        });
+                        myDynamicElement = wait.Until<IWebElement>((d) => d.FindElement(By.Name(element)));
                         MethodSuccess = true;
                         return myDynamicElement;
                     case 3:
-                        myDynamicElement = wait.Until<IWebElement>((d) =>
-                        {
-                            return d.FindElement(By.TagName(element));
-                        });
+                        myDynamicElement = wait.Until<IWebElement>((d) => d.FindElement(By.TagName(element)));
                         MethodSuccess = true;
                         return myDynamicElement;
                     case 4:
-                        myDynamicElement = wait.Until<IWebElement>((d) =>
-                        {
-                            return d.FindElement(By.PartialLinkText(element));
-                        });
+                        myDynamicElement = wait.Until<IWebElement>((d) => d.FindElement(By.PartialLinkText(element)));
                         MethodSuccess = true;
                         return myDynamicElement;
                     case 5:
-                        myDynamicElement = wait.Until<IWebElement>((d) =>
-                        {
-                            return d.FindElement(By.LinkText(element));
-                        });
+                        myDynamicElement = wait.Until<IWebElement>((d) => d.FindElement(By.LinkText(element)));
                         MethodSuccess = true;
                         return myDynamicElement;
                     case 6:
-                        myDynamicElement = wait.Until<IWebElement>((d) =>
-                        {
-                            return d.FindElement(By.CssSelector(element));
-                        });
+                        myDynamicElement = wait.Until<IWebElement>((d) => d.FindElement(By.CssSelector(element)));
                         MethodSuccess = true;
                         return myDynamicElement;                        
                     case 7:
-                        myDynamicElement = wait.Until<IWebElement>((d) =>
-                        {
-                            return d.FindElement(By.XPath(element));
-                        });
+                        myDynamicElement = wait.Until<IWebElement>((d) => d.FindElement(By.XPath(element)));
                         MethodSuccess = true;
                         return myDynamicElement;
                     default:
@@ -388,68 +367,19 @@ namespace SeleniumMetabot
             switch (ElementHelper.WebElementHelper(elementType, element))
             {
                 case 1:
-                    if (IsElementPresent(By.Id(element)))
-                    {
-                        return true.ToString();
-                    }
-                    else
-                    {
-                        return false.ToString();
-                    }
+                    return IsElementPresent(By.Id(element)) ? true.ToString() : false.ToString();
                 case 2:
-                    if (IsElementPresent(By.Name(element)))
-                    {
-                        return true.ToString();
-                    }
-                    else
-                    {
-                        return false.ToString();
-                    }
+                    return IsElementPresent(By.Name(element)) ? true.ToString() : false.ToString();
                 case 3:
-                    if (IsElementPresent(By.TagName(element)))
-                    {
-                        return true.ToString();
-                    }
-                    else
-                    {
-                        return false.ToString();
-                    }
+                    return IsElementPresent(By.TagName(element)) ? true.ToString() : false.ToString();
                 case 4:
-                    if (IsElementPresent(By.PartialLinkText(element)))
-                    {
-                        return true.ToString();
-                    }
-                    else
-                    {
-                        return false.ToString();
-                    }
+                    return IsElementPresent(By.PartialLinkText(element)) ? true.ToString() : false.ToString();
                 case 5:
-                    if (IsElementPresent(By.LinkText(element)))
-                    {
-                        return true.ToString();
-                    }
-                    else
-                    {
-                        return false.ToString();
-                    }
+                    return IsElementPresent(By.LinkText(element)) ? true.ToString() : false.ToString();
                 case 6:
-                    if (IsElementPresent(By.CssSelector(element)))
-                    {
-                        return true.ToString();
-                    }
-                    else
-                    {
-                        return false.ToString();
-                    }
+                    return IsElementPresent(By.CssSelector(element)) ? true.ToString() : false.ToString();
                 case 7:
-                    if (IsElementPresent(By.XPath(element)))
-                    {
-                        return true.ToString();
-                    }
-                    else
-                    {
-                        return false.ToString();
-                    }
+                    return IsElementPresent(By.XPath(element)) ? true.ToString() : false.ToString();
                 default:
                     throw new ArgumentException("The given argument " + elementType + " for elementType is invalid.");
             }

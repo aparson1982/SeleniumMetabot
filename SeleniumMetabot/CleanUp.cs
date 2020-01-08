@@ -25,7 +25,7 @@ namespace SeleniumMetabot
         {
             try
             {
-                //Process[] processes = Process.GetProcessesByName("chromedriver.exe");
+                
                 var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName.CaseInsensitiveContains("chrome"));
                 var driverProcesses = chromeDriverProcesses.ToList();
                 if (!driverProcesses.Any()) return;

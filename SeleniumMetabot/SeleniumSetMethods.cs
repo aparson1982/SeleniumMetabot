@@ -36,7 +36,7 @@ namespace SeleniumMetabot
                     str = "Entered " + value + " into element [" + elementType + ": " + element + "]" + Environment.NewLine;
                 }
 
-                //TODO:  Validate value that is in textbox and return success or not
+                
 
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace SeleniumMetabot
                 }
 
                 MethodSuccess = true;
-                //TODO:  Validate value that is in textbox and return success or not
+                
 
             }
             catch (Exception e)

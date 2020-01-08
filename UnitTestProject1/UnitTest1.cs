@@ -102,7 +102,7 @@ namespace UnitTestProject1
             var stopWatch = Stopwatch.StartNew();
             Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//body/nav[@class='navbar fixed-top navbar-light']/table[@id='app_main_menu_table']/tbody/tr/td[@class='appHeader']/table[@class='appHeader']/tbody/tr/td/div[@id='mainMenuDiv']/ul/li[7]/a[1]")));
             stopWatch.Stop();
-            Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine) ;
+            Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
             stopWatch.Restart();
             Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//li[7]//ul[1]//li[5]//a[1]")));
             stopWatch.Stop();
