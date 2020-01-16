@@ -364,26 +364,69 @@ namespace SeleniumMetabot
             string str = string.Empty;
             elementType = Regex.Replace(elementType, @"s", "");
 
+            Navigation.SwitchToDefaultFrame();
             switch (ElementHelper.WebElementHelper(elementType, element))
             {
                 case 1:
-                    return IsElementPresent(By.Id(element)) ? true.ToString() : false.ToString();
+                    str = IsElementPresent(By.Id(element)) ? true.ToString() : false.ToString();
+                    break;
                 case 2:
-                    return IsElementPresent(By.Name(element)) ? true.ToString() : false.ToString();
+                    str = IsElementPresent(By.Name(element)) ? true.ToString() : false.ToString();
+                    break;
                 case 3:
-                    return IsElementPresent(By.TagName(element)) ? true.ToString() : false.ToString();
+                    str = IsElementPresent(By.TagName(element)) ? true.ToString() : false.ToString();
+                    break;
                 case 4:
-                    return IsElementPresent(By.PartialLinkText(element)) ? true.ToString() : false.ToString();
+                    str = IsElementPresent(By.PartialLinkText(element)) ? true.ToString() : false.ToString();
+                    break;
                 case 5:
-                    return IsElementPresent(By.LinkText(element)) ? true.ToString() : false.ToString();
+                    str = IsElementPresent(By.LinkText(element)) ? true.ToString() : false.ToString();
+                    break;
                 case 6:
-                    return IsElementPresent(By.CssSelector(element)) ? true.ToString() : false.ToString();
+                    str = IsElementPresent(By.CssSelector(element)) ? true.ToString() : false.ToString();
+                    break;
                 case 7:
-                    return IsElementPresent(By.XPath(element)) ? true.ToString() : false.ToString();
+                    str = IsElementPresent(By.XPath(element)) ? true.ToString() : false.ToString();
+                    break;
                 default:
                     throw new ArgumentException("The given argument " + elementType + " for elementType is invalid.");
             }
-
+            IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
+            if (str.Contains("false"))
+            {
+                foreach (IWebElement iframe in iframes)
+                {
+                    driver.SwitchTo().Frame(iframe);
+                    switch (ElementHelper.WebElementHelper(elementType, element))
+                    {
+                        case 1:
+                            str = IsElementPresent(By.Id(element)) ? true.ToString() : false.ToString();
+                            break;
+                        case 2:
+                            str = IsElementPresent(By.Name(element)) ? true.ToString() : false.ToString();
+                            break;
+                        case 3:
+                            str = IsElementPresent(By.TagName(element)) ? true.ToString() : false.ToString();
+                            break;
+                        case 4:
+                            str = IsElementPresent(By.PartialLinkText(element)) ? true.ToString() : false.ToString();
+                            break;
+                        case 5:
+                            str = IsElementPresent(By.LinkText(element)) ? true.ToString() : false.ToString();
+                            break;
+                        case 6:
+                            str = IsElementPresent(By.CssSelector(element)) ? true.ToString() : false.ToString();
+                            break;
+                        case 7:
+                            str = IsElementPresent(By.XPath(element)) ? true.ToString() : false.ToString();
+                            break;
+                        default:
+                            throw new ArgumentException("The given argument " + elementType + " for elementType is invalid.");
+                    }
+                }
+            }
+            return str;
+            
         }
     }
 }

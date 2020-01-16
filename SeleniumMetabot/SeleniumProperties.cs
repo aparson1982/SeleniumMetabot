@@ -19,7 +19,9 @@ namespace SeleniumMetabot
         
         internal static void InitializeDriver()
         {
-            driver = new ChromeDriver();
+            //driver = new ChromeDriver(@"C:\Program Files (x86)\Automation Anywhere\Enterprise\Client");
+            driver = new ChromeDriver(".");
+            //driver = new ChromeDriver("\\nas72v2\rpa\Selenium");
         }
 
 

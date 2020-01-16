@@ -89,7 +89,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void SClickTest()
         {
-            //SeleniumProperties.doTakeScreenshot = true;
+            SeleniumProperties.doTakeScreenshot = true;
             Initialize.OpenUrl("http://sw72cseapqa:8080/CSWI/login/login.jsp");
             PageSetup.MaximizeWindow();
             Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//input[@name='userId']", 5));

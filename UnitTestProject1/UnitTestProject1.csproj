@@ -47,7 +47,7 @@
     </Reference>
     <Reference Include="SeleniumMetabot, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SeleniumMetabot\bin\Debug\SeleniumMetabot.dll</HintPath>
+      <HintPath>\\nas72v2\rpa\Selenium\SeleniumMetabot.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
