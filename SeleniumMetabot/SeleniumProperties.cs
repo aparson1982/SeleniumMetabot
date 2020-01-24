@@ -19,11 +19,16 @@ namespace SeleniumMetabot
         
         internal static void InitializeDriver()
         {
-            //driver = new ChromeDriver(@"C:\Program Files (x86)\Automation Anywhere\Enterprise\Client");
-            driver = new ChromeDriver(".");
+            driver = new ChromeDriver(@"C:\Program Files (x86)\Automation Anywhere\Enterprise\Client");
+            //driver = new ChromeDriver(".");
             //driver = new ChromeDriver("\\nas72v2\rpa\Selenium");
+            
         }
 
+        public static void SpeedSettings(int seconds = 0)
+        {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
+        }
 
         private static string _Path;
         public static string Path

@@ -39,7 +39,59 @@ namespace SeleniumMetabot
                     throw new TimeoutException("Timed out.");
 
                 });
+                MethodSuccess = true;
                 str = "true";
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                MethodSuccess = false;
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return str;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
+        public static string iWaitTilDisplayed(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            int count = 1;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                Navigation.SwitchToDefaultFrame();
+                IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
+
+                str = WaitDisplayed(elementType, element, timeoutInSeconds / 2);
+                if (MethodSuccess == false)
+                {
+                    foreach (IWebElement iframe in iframes)
+                    {
+                        driver.SwitchTo().Frame(iframe);
+                        while (count <= timeoutInSeconds && MethodSuccess == false)
+                        {
+                            str = "Attempting to find in other frames...  " + WaitDisplayed(elementType, element, count) + Environment.NewLine;
+
+                            count++;
+                            
+                        }
+                        
+                    }
+
+                }
             }
             catch (Exception e)
             {
@@ -53,8 +105,9 @@ namespace SeleniumMetabot
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
                     "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
+
 
         /// <summary>
         /// Implicitly waits for the element to be Enabled.
@@ -63,7 +116,7 @@ namespace SeleniumMetabot
         /// <param name="element"></param>
         /// <param name="timeoutInSeconds"></param>
         /// <returns></returns>
-        public static string WaitEnabled(string elementType, string element, int timeoutInSeconds)
+        public static string WaitTilEnabled(string elementType, string element, int timeoutInSeconds)
         {
             string str = string.Empty;
             elementType = Regex.Replace(elementType, @"s", "");
@@ -80,7 +133,60 @@ namespace SeleniumMetabot
                     throw new TimeoutException("Timed out.");
 
                 });
+                MethodSuccess = true;
                 str = "true";
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                MethodSuccess = false;
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return str;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
+        public static string iWaitTilEnabled(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            int count = 1;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                Navigation.SwitchToDefaultFrame();
+                IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
+
+                str = WaitTilEnabled(elementType, element, timeoutInSeconds / 2);
+                if (MethodSuccess == false)
+                {
+                    foreach (IWebElement iframe in iframes)
+                    {
+                        driver.SwitchTo().Frame(iframe);
+
+                        while (count <= timeoutInSeconds && MethodSuccess == false)
+                        {
+
+                            str = "Attempting to find in other frames...  " + WaitTilEnabled(elementType, element, count) + Environment.NewLine;
+                            count++;
+                            
+                        }
+                        
+                    }
+
+                }
             }
             catch (Exception e)
             {
@@ -94,8 +200,9 @@ namespace SeleniumMetabot
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
                     "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
+
 
         /// <summary>
         /// Implicit wait that waits for the element to be Enabled and Displayed
@@ -121,8 +228,60 @@ namespace SeleniumMetabot
                     throw new TimeoutException("Timed out.");
 
                 });
+                MethodSuccess = true;
                 str = "true";
              }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                MethodSuccess = false;
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return str;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
+        public static string iWaitTilReady(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            int count = 1;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                Navigation.SwitchToDefaultFrame();
+                IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
+
+                str = WaitTilReady(elementType, element, timeoutInSeconds / 2);
+
+                if (MethodSuccess == false)
+                {
+                    foreach (IWebElement iframe in iframes)
+                    {
+                        driver.SwitchTo().Frame(iframe);
+                        while (count <= timeoutInSeconds && MethodSuccess == false)
+                        {
+                            str = "Attempting to find in other frames...  " + WaitTilReady(elementType, element, count) + Environment.NewLine;
+                            count++;
+                        }
+                        
+                    }
+
+                }
+            }
             catch (Exception e)
             {
                 if (doTakeScreenshot)
@@ -135,10 +294,57 @@ namespace SeleniumMetabot
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
                     "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
-            return str;
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
+
+        public static string iWaitForElement(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            string str2 = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                str = iWaitTilDisplayed(elementType, element, timeoutInSeconds);
+                str2 = str;
+                if (!str.Contains("true"))
+                {
+                    str = iWaitTilEnabled(elementType, element, timeoutInSeconds);
+                    str2 += str;
+                    if (!str.Contains("true"))
+                    {
+                        str = iWaitTilReady(elementType, element, timeoutInSeconds);
+                        str2 += str;
+                        if (!str.Contains("true"))
+                        {
+                            str = str2;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
         private static string ExplicitWait(string elementType, string element, int timeoutInSeconds)
         {
             string str = string.Empty;
