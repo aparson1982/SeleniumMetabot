@@ -13,7 +13,7 @@ namespace SeleniumMetabot
 {
     public class Navigation : SeleniumProperties
     {
-        
+        private static List<char> delimiterList = new List<char> { '`', '~', '!', '#', '$', '@', '^', '&', '*', '(', ')', '[', ']', '{', '}', '\\', '|', ':', ';', ',', '<', '>', '.', '/', '-', '_', '+' };
         public static string ScrollIntoView(string elementType, string element)
         {
             string str = string.Empty;
@@ -84,7 +84,109 @@ namespace SeleniumMetabot
             driver.SwitchTo().DefaultContent();
         }
 
+        public static string SwitchToLastOpenedWindow()
+        {
+            string str = string.Empty;
+            try
+            {
+                driver.SwitchTo().Window(driver.WindowHandles.Last());
+                str = "Switched to Window:  " + driver.Title;
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                str = "There was an exception switching Frames." + Environment.NewLine +
+                    "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
 
-        
+        public static string GetCurrentWindowHandle()
+        {
+            string str = string.Empty;
+            try
+            {
+                string winHandleBefore = driver.CurrentWindowHandle;
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                str = "There was an exception switching Frames." + Environment.NewLine +
+                    "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return str;
+        }
+
+        public static string SwitchToWindow(string handle)
+        {
+            string str = string.Empty;
+            try
+            {
+                driver.SwitchTo().Window(handle);
+                str = "Switched to Window:  " + driver.Title;
+            }
+            catch (Exception e)
+            {
+                str = "There was an exception switching Frames." + Environment.NewLine +
+                    "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
+
+        public static string GetMultipleWindowHandles(string delimiter)
+        {
+            string str = string.Empty;
+            try
+            {
+                List<string> lstWindow = driver.WindowHandles.ToList();
+                
+                foreach(var element in lstWindow)
+                {
+                    if (element.Contains(delimiter))
+                    {
+                        str +=
+                                "Error:  The delimiter '" + delimiter + "' cannot be used because one or more values contains that delimiter." + Environment.NewLine + Environment.NewLine + "Available delimiters include:  " + Environment.NewLine;
+
+                        string tempString = string.Join(",", lstWindow.ToArray());
+                        char[] characters = tempString.ToCharArray();
+                        var unusedDelimiters = delimiterList.Except(characters);
+
+                        foreach (var character in unusedDelimiters)
+                        {
+                            str += character.ToString() + "  ";
+                        }
+
+                        return SeleniumUtilities.MethodName() + ":  " + str;
+                    }
+                }
+                str = string.Join(delimiter.ToString(), lstWindow.ToArray());
+            }
+            catch (Exception e)
+            {
+                str = "There was an exception switching Frames." + Environment.NewLine +
+                    "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return str;
+        }
+
+
     }
 }

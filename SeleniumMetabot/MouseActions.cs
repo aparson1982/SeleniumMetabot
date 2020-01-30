@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+
 namespace SeleniumMetabot
 {
     public class MouseActions : SeleniumProperties
@@ -203,6 +204,10 @@ namespace SeleniumMetabot
                             }
                         }
                     }
+                }
+                else
+                {
+                    MethodSuccess = true;
                 }
 
             }
