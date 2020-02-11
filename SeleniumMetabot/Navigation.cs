@@ -89,7 +89,7 @@ namespace SeleniumMetabot
             string str = string.Empty;
             try
             {
-                driver.SwitchTo().Window(driver.WindowHandles.Last());
+                driver.SwitchTo().Window(driver.WindowHandles.Last());                
                 str = "Switched to Window:  " + driver.Title;
             }
             catch (Exception e)
@@ -160,7 +160,7 @@ namespace SeleniumMetabot
                     if (element.Contains(delimiter))
                     {
                         str +=
-                                "Error:  The delimiter '" + delimiter + "' cannot be used because one or more values contains that delimiter." + Environment.NewLine + Environment.NewLine + "Available delimiters include:  " + Environment.NewLine;
+                                "Error:  The delimiter '" + delimiter + "' cannot be used because one or more values contains that delimiter." + Environment.NewLine + "Available delimiters include:  " + Environment.NewLine;
 
                         string tempString = string.Join(",", lstWindow.ToArray());
                         char[] characters = tempString.ToCharArray();

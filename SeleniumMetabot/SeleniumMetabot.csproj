@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AAEDebugHelper.cs" />
     <Compile Include="AlertHandler.cs" />
     <Compile Include="ElementHelper.cs" />
     <Compile Include="Extensions.cs" />
