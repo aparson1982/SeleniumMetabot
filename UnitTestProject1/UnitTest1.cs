@@ -90,10 +90,11 @@ namespace UnitTestProject1
         public void SClickTest()
         {
             ////SeleniumProperties.doTakeScreenshot = true;
-            //SeleniumProperties.SpeedSettings(2);
+            ////SeleniumProperties.SpeedSettings(0);
             //Initialize.OpenUrl("http://sw72cseapqa:8080/CSWI/login/login.jsp");
-            
+
             //PageSetup.MaximizeWindow();
+            //Console.WriteLine(MouseActions.JClick("xp", "duh"));
             //Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//input[@name='userId']", 5));
             //Console.WriteLine(SeleniumUtilities.LineNumber() + (SeleniumSetMethods.iEnterText("xp", "//input[@name='userId']", "SOLLRPA")));
 

@@ -14,31 +14,67 @@ namespace SeleniumMetabot
     public class CleanUp : SeleniumProperties
     {
         
-        public static void Demolish()
+        public static string Demolish()
         {
-            driver.Close();
-            driver.Quit();
-            KillChromeDriverProcess();
-        }
-
-        internal static void KillChromeDriverProcess()
-        {
+            string str = string.Empty;
             try
             {
-                
+                driver.Close();
+                str += "Closed the browser." + Environment.NewLine;
+            }
+            catch (Exception e)
+            {
+                str = "Attempted driver.Close() but received error."+ Environment.NewLine +
+                      "Error" + Environment.NewLine +
+                      "Message:  " + e.Message + Environment.NewLine +
+                      "Source:  " + e.Source + Environment.NewLine +
+                      "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                      "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            try
+            {
+                driver.Quit();
+                str += "Quit the driver." + Environment.NewLine;
+            }
+            catch (Exception e)
+            {
+                str += "Attempted driver.Quit() but received error." + Environment.NewLine +
+                      "Error" + Environment.NewLine +
+                      "Message:  " + e.Message + Environment.NewLine +
+                      "Source:  " + e.Source + Environment.NewLine +
+                      "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                      "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            str += KillChromeDriverProcess();
+
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
+
+        internal static string KillChromeDriverProcess()
+        {
+            string str = string.Empty;
+            try
+            {
                 var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName.CaseInsensitiveContains("chrome"));
                 var driverProcesses = chromeDriverProcesses.ToList();
-                if (!driverProcesses.Any()) return;
+                if (!driverProcesses.Any()) return null;
                 foreach (var process in driverProcesses)
                 {
+                    str += "Killing " + process.ProcessName + "..." + Environment.NewLine; ;
                     process.Kill();
                 }
 
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                str += "Attempted to kill the ChromeDriver process but received an error." + Environment.NewLine +
+                     "Error" + Environment.NewLine +
+                     "Message:  " + e.Message + Environment.NewLine +
+                     "Source:  " + e.Source + Environment.NewLine +
+                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                     "Inner Exception:  " + e.InnerException + Environment.NewLine;
             }
+            return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
 
