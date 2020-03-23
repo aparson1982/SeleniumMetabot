@@ -23,6 +23,7 @@ namespace SeleniumMetabot
                 IWebElement webElement = ElementHelper.WebElement(elementType, element);
                 actions.MoveToElement(webElement);
                 str = "Scrolled to the element " + element + Environment.NewLine;
+                MethodSuccess = true;
             }
             catch (Exception e)
             {
@@ -30,6 +31,7 @@ namespace SeleniumMetabot
                 {
                     ScreenShot.TakeScreenShot();
                 }
+                MethodSuccess = false;
                 str = "There was an exception switching Frames." + Environment.NewLine +
                       "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
@@ -55,9 +57,11 @@ namespace SeleniumMetabot
             {
                 driver.Navigate().Refresh();
                 str = "Page refreshed successfully.";
+                MethodSuccess = true;
             }
             catch (Exception e)
             {
+                MethodSuccess = false;
                 str = "There was an exception switching Frames." + Environment.NewLine +
                       "Message:  " + e.Message + Environment.NewLine +
                       "Source:  " + e.Source + Environment.NewLine +
