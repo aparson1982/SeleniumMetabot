@@ -4,7 +4,7 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-//using SeleniumMetabot;
+using SeleniumMetabot;
 
 namespace UnitTestProject1
 {
@@ -89,20 +89,32 @@ namespace UnitTestProject1
         [TestMethod]
         public void SClickTest()
         {
-            ////SeleniumProperties.doTakeScreenshot = true;
-            ////SeleniumProperties.SpeedSettings(0);
-            //Initialize.OpenUrl("http://sw72cseapqa:8080/CSWI/login/login.jsp");
+            //SeleniumProperties.doTakeScreenshot = true;
+            //SeleniumProperties.SpeedSettings(0);
+            Initialize.OpenUrl("http://sw72cseapdv:8080/CSWI/login/login.jsp");
 
-            //PageSetup.MaximizeWindow();
-            //Console.WriteLine(MouseActions.JClick("xp", "duh"));
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//input[@name='userId']", 5));
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + (SeleniumSetMethods.iEnterText("xp", "//input[@name='userId']", "SOLLRPA")));
+            PageSetup.MaximizeWindow();
+            SeleniumProperties.SpeedSettings(0);
+            Console.WriteLine(MouseActions.JClick("xp", "duh"));
+            Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//input[@name='userId']", 5));
+            Console.WriteLine(SeleniumUtilities.LineNumber() + (SeleniumSetMethods.iEnterText("xp", "//input[@name='userId']", "SOLLRPA")));
 
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + (SeleniumSetMethods.iEnterText("xp", "//input[@name='password']", "fR3kZwFe7UDGVHEe")));
+            Console.WriteLine(SeleniumUtilities.LineNumber() + (SeleniumSetMethods.iEnterText("xp", "//input[@name='password']", "fR3kZwFe7UDGVHEe")));
 
-            //MouseActions.Submit("xp", "//input[@class='button']");
+            MouseActions.Submit("xp", "//input[@class='button']");
 
             //var stopWatch = Stopwatch.StartNew();
+
+            Console.WriteLine(SeleniumSetMethods.iEnterText("name", "ORDERNBR", "031252",false));
+
+            Console.WriteLine(MouseActions.iClick("name", "Find"));
+
+            //Console.WriteLine(ElementHelper.iWaitForElement("xp", "//b[contains(text(),'SHIPPED(S)')]", 1));
+            //Console.WriteLine(SeleniumProperties.MethodSuccess.ToString());
+
+            Console.WriteLine(SeleniumGetMethods.iGetText("xp", @"//td[@class='detailText']//child::font[@class='lineText']//child::b"));
+
+            //Console.WriteLine(Navigation.RefreshPage());
             //Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//body/nav[@class='navbar fixed-top navbar-light']/table[@id='app_main_menu_table']/tbody/tr/td[@class='appHeader']/table[@class='appHeader']/tbody/tr/td/div[@id='mainMenuDiv']/ul/li[7]/a[1]")));
             //stopWatch.Stop();
             //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);

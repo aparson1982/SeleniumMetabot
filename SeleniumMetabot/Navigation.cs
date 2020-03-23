@@ -48,7 +48,24 @@ namespace SeleniumMetabot
             driver.Navigate().GoToUrl(url);
         }
 
-
+        public static string RefreshPage()
+        {
+            string str = string.Empty;
+            try
+            {
+                driver.Navigate().Refresh();
+                str = "Page refreshed successfully.";
+            }
+            catch (Exception e)
+            {
+                str = "There was an exception switching Frames." + Environment.NewLine +
+                      "Message:  " + e.Message + Environment.NewLine +
+                      "Source:  " + e.Source + Environment.NewLine +
+                      "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                      "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
         public static string SwitchFrames(string elementType, string element)
         {
             string str = string.Empty;
