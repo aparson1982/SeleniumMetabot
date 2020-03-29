@@ -105,121 +105,144 @@ namespace UnitTestProject1
 
             //var stopWatch = Stopwatch.StartNew();
 
-            Console.WriteLine(SeleniumSetMethods.iEnterText("name", "ORDERNBR", "031252",false));
+            Console.WriteLine(Navigation.GetCurrentWindowHandle());
 
-            Console.WriteLine(MouseActions.iClick("name", "Find"));
+            //Console.WriteLine(SeleniumSetMethods.iEnterText("name", "ORDERNBR", "031252",false));
 
-            //Console.WriteLine(ElementHelper.iWaitForElement("xp", "//b[contains(text(),'SHIPPED(S)')]", 1));
-            //Console.WriteLine(SeleniumProperties.MethodSuccess.ToString());
+            //Console.WriteLine(MouseActions.iClick("name", "Find"));
 
-            Console.WriteLine(SeleniumGetMethods.iGetText("xp", @"//td[@class='detailText']//child::font[@class='lineText']//child::b"));
+            ////Console.WriteLine(ElementHelper.iWaitForElement("xp", "//b[contains(text(),'SHIPPED(S)')]", 1));
+            ////Console.WriteLine(SeleniumProperties.MethodSuccess.ToString());
 
-            //Console.WriteLine(Navigation.RefreshPage());
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//body/nav[@class='navbar fixed-top navbar-light']/table[@id='app_main_menu_table']/tbody/tr/td[@class='appHeader']/table[@class='appHeader']/tbody/tr/td/div[@id='mainMenuDiv']/ul/li[7]/a[1]")));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//li[7]//ul[1]//li[5]//a[1]")));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            //Console.WriteLine(SeleniumGetMethods.iGetText("xp", @"//td[@class='detailText']//child::font[@class='lineText']//child::b"));
 
-            //string bolNumber = "989039";
-            //string bolDate = "12/09/2019";
+            ////Console.WriteLine(Navigation.RefreshPage());
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//body/nav[@class='navbar fixed-top navbar-light']/table[@id='app_main_menu_table']/tbody/tr/td[@class='appHeader']/table[@class='appHeader']/tbody/tr/td/div[@id='mainMenuDiv']/ul/li[7]/a[1]")));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//li[7]//ul[1]//li[5]//a[1]")));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+
+            ////string bolNumber = "989039";
+            ////string bolDate = "12/09/2019";
+
+            //////Console.WriteLine(Navigation.SwitchFrames("name", "frame2"));
+
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + (SeleniumSetMethods.iEnterText("id", "bolNbr", bolNumber + Keys.Enter)));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+
+            ////stopWatch.Restart();
+            ////Console.WriteLine(Navigation.SwitchFrames("name", "frame2"));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            //////Console.WriteLine(SeleniumUtilities.LineNumber() + ("BolNumber:  " + SeleniumGetMethods.iGetValue("id", "bolNbr")));
+            //////Console.WriteLine((SeleniumSetMethods.iEnterText("id", "bolNbr", Keys.Enter)));
+
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("id", "bolDate", 5));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumSetMethods.iEnterText("id", "bolDate", bolDate + Keys.Enter));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
             ////Console.WriteLine(Navigation.SwitchFrames("name", "frame2"));
+            //////Console.WriteLine((SeleniumSetMethods.iEnterText(bolDate, "id", "bolDate")));
+            //////ElementHelper.WaitTilReady("xp", "//input[@onclick='return displayOrder();']", 15);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//input[@onclick='return displayOrder();']", 5));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            //////Thread.Sleep(3000);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//input[@onclick='return displayOrder();']")));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + (SeleniumSetMethods.iEnterText("id", "bolNbr", bolNumber + Keys.Enter)));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////Navigation.SwitchFrames("name", "frame2");
 
-            //stopWatch.Restart();
-            //Console.WriteLine(Navigation.SwitchFrames("name", "frame2"));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-            ////Console.WriteLine(SeleniumUtilities.LineNumber() + ("BolNumber:  " + SeleniumGetMethods.iGetValue("id", "bolNbr")));
-            ////Console.WriteLine((SeleniumSetMethods.iEnterText("id", "bolNbr", Keys.Enter)));
+            ////if (ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]").Equals("True"))
+            ////{
+            ////    Console.WriteLine(ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]"));
+            ////    //Console.WriteLine(MouseActions.JClick("xp", "//span[contains(text(),'Ok')]"));
+            ////    Console.WriteLine(MouseActions.iClick("xp", "//span[contains(text(),'Ok')]"));
+            ////}
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("id", "bolDate", 5));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + (ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]")));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumSetMethods.iEnterText("id", "bolDate", bolDate + Keys.Enter));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']", 5));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
-            //Console.WriteLine(Navigation.SwitchFrames("name", "frame2"));
-            ////Console.WriteLine((SeleniumSetMethods.iEnterText(bolDate, "id", "bolDate")));
-            ////ElementHelper.WaitTilReady("xp", "//input[@onclick='return displayOrder();']", 15);
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//input[@onclick='return displayOrder();']", 5));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-            ////Thread.Sleep(3000);
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + (MouseActions.iClick("xp", "//input[@onclick='return displayOrder();']")));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            //////Console.WriteLine(SeleniumUtilities.LineNumber() + (ElementHelper.WaitTilReady("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']", 15)));
+            ////Navigation.SwitchToDefaultFrame();
+            ////Navigation.SwitchFrames("id", "frame2");
+            //////ElementHelper.WaitTilReady("xp", "//table[2]//tbody//tr//td[contains(text(),'FUEL')]/following-sibling::td[@align='left']", 15);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']", 5));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////var fuel = SeleniumGetMethods.iGetText("xp", "//table[2]//tbody//tr//td[contains(text(),'FUEL')]/following-sibling::td[@align='left']");
+            ////var drop = SeleniumGetMethods.iGetText("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']");
 
-            //Navigation.SwitchFrames("name", "frame2");
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + MouseActions.iClick("plt", "Freight"));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
-            //if (ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]").Equals("True"))
-            //{
-            //    Console.WriteLine(ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]"));
-            //    //Console.WriteLine(MouseActions.JClick("xp", "//span[contains(text(),'Ok')]"));
-            //    Console.WriteLine(MouseActions.iClick("xp", "//span[contains(text(),'Ok')]"));
-            //}
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + MouseActions.iClick("plt", "Transportation Que"));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////// MouseActions.SmartClick("//a[contains(text(),'Transportation Queue')]");
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + (ElementHelper.IsElementAvailable("xp", "//span[contains(text(),'Ok')]")));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + SeleniumSetMethods.iEnterText("name", "bolNbr", bolNumber));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']", 5));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + "2nd BolNbr:  " + SeleniumGetMethods.iGetValue("name", "bolNbr"));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
-            ////Console.WriteLine(SeleniumUtilities.LineNumber() + (ElementHelper.WaitTilReady("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']", 15)));
-            //Navigation.SwitchToDefaultFrame();
-            //Navigation.SwitchFrames("id", "frame2");
-            ////ElementHelper.WaitTilReady("xp", "//table[2]//tbody//tr//td[contains(text(),'FUEL')]/following-sibling::td[@align='left']", 15);
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + ElementHelper.iExplicitWait("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']", 5));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-            //var fuel = SeleniumGetMethods.iGetText("xp", "//table[2]//tbody//tr//td[contains(text(),'FUEL')]/following-sibling::td[@align='left']");
-            //var drop = SeleniumGetMethods.iGetText("xp", "//table[2]//tbody//tr//td[contains(text(),'DROP')]/following-sibling::td[@align='left']");
+            ////stopWatch.Restart();
+            ////Console.WriteLine(SeleniumUtilities.LineNumber() + MouseActions.iClick("xp", "//div[@id='searchCriteria']//td[1]//input[1]"));
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + MouseActions.iClick("plt", "Freight"));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
+            CleanUp.Demolish();
+        }
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + MouseActions.iClick("plt", "Transportation Que"));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-            //// MouseActions.SmartClick("//a[contains(text(),'Transportation Queue')]");
+        [TestMethod]
+        public void DoubleClickTest()
+        {
+            
+            Initialize.OpenUrl("https://usflvtprd.shawinc.com/usf/mvc/gui/launch");
+            PageSetup.MaximizeWindow();
+            SeleniumProperties.SpeedSettings(2);
+            Thread.Sleep(3000);
+            Console.WriteLine(SeleniumSetMethods.iEnterText("id","username", "svcbotqa"));
+            Console.WriteLine(SeleniumSetMethods.iEnterText("id","password", "IywHYeOFXj9IEMgv"));
+            Console.WriteLine(MouseActions.iClick("id", "kc-login"));
+            Console.WriteLine(MouseActions.iDoubleClick("xp", "//a[@class='x-tree-node-anchor']//span[contains(text(),'Reports')]"));
+            Console.WriteLine(MouseActions.iClick("xp", "//span[contains(text(),'Run report')]"));
+            Console.WriteLine(MouseActions.iClick("xp", "//div[contains(text(),'User Override')]"));
+            Console.WriteLine(MouseActions.iClick("xp", "//body[contains(@class,'ext-webkit ext-chrome x-border-layout-ct')]/div[contains(@class,'x-tab-panel x-border-panel')]/div[@class='x-tab-panel-bwrap']/div[@class='x-tab-panel-body x-tab-panel-body-top']/div[contains(@class,'x-panel x-panel-noborder')]/div[@class='x-panel-bwrap']/div[@class='x-panel-body x-panel-body-noheader x-panel-body-noborder x-box-layout-ct']/div[@class='x-box-inner']/div[contains(@class,'x-panel x-box-item')]/div[@class='x-panel-bwrap']/div[@class='x-panel-body']/div[contains(@class,'x-panel x-panel-noborder x-form-label-left')]/div[@class='x-panel-bwrap']/form[@class='x-panel-body formPannelPad x-panel-body-noheader x-panel-body-noborder x-form']/div[contains(@class,'x-form-item')]/div[@class='x-form-element']/div[contains(@class,'x-panel x-tree')]/div[@class='x-panel-bwrap']/div[@class='x-panel-body x-panel-body-noheader']/ul[@class='x-tree-root-ct x-tree-arrows']/div[@class='x-tree-root-node']/li[@class='x-tree-node']/ul[@class='x-tree-node-ct']/li[@class='x-tree-node']/ul[@class='x-tree-node-ct']/li[1]/div[1]/input[1]"));
 
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + SeleniumSetMethods.iEnterText("name", "bolNbr", bolNumber));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + "2nd BolNbr:  " + SeleniumGetMethods.iGetValue("name", "bolNbr"));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-
-            //stopWatch.Restart();
-            //Console.WriteLine(SeleniumUtilities.LineNumber() + MouseActions.iClick("xp", "//div[@id='searchCriteria']//td[1]//input[1]"));
-            //stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed + Environment.NewLine + Environment.NewLine);
-
-            //CleanUp.Demolish();
+            //MouseActions.DoubleClick("xp", "//button[contains(text(),'Double-Click Me To See Alert')]");
+            Thread.Sleep(9000);
+            CleanUp.Demolish();
         }
 
     }

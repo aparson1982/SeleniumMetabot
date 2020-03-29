@@ -108,6 +108,44 @@ namespace SeleniumMetabot
             return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
+        
+        //internal static WaitTilClickable(string elementType, string element, int timeoutInSeconds)
+        //{
+        //    string str = string.Empty;
+        //    elementType = Regex.Replace(elementType, @"s", "");
+        //    try
+        //    {
+        //        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+        //        wait.Until(ExpectedConditions.ElementToBeClickable());
+        //        //wait.Until((d) =>
+        //        //{
+        //        //    IWebElement webElement = WebElement(elementType, element);
+        //        //    if (webElement.Enabled || webElement.GetAttribute("aria-disabled") == null)
+        //        //    {
+        //        //        return webElement;
+        //        //    }
+        //        //    throw new TimeoutException("Timed out.");
+
+        //        //});
+        //        MethodSuccess = true;
+        //        str = "true";
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        if (doTakeScreenshot)
+        //        {
+        //            ScreenShot.TakeScreenShot();
+        //        }
+        //        MethodSuccess = false;
+        //        str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+        //            "Source:  " + e.Source + Environment.NewLine +
+        //            "StackTrace:  " + e.StackTrace + Environment.NewLine +
+        //            "Inner Exception:  " + e.InnerException + Environment.NewLine +
+        //            "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+        //    }
+        //    return str;
+        //}
+
 
         /// <summary>
         /// Implicitly waits for the element to be Enabled.

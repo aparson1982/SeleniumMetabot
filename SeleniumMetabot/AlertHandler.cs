@@ -17,12 +17,12 @@ namespace SeleniumMetabot
             try
             {
                 IAlert alert = driver.SwitchTo().Alert();
-                alertMsg += SeleniumUtilities.MethodName() + ":  " + "Alert Present" + Environment.NewLine;
+                alertMsg = SeleniumUtilities.MethodName() + ":  " + "Alert Present" + Environment.NewLine;
                 return true;
             }
             catch (NoAlertPresentException)
             {
-                alertMsg += SeleniumUtilities.MethodName() + ":  " + "Alert Not Found." + Environment.NewLine;
+                alertMsg = SeleniumUtilities.MethodName() + ":  " + "No Alert." + Environment.NewLine;
                 return false;
             }
         }
