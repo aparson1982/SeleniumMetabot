@@ -247,19 +247,19 @@ namespace SeleniumMetabot
                                 driver.SwitchTo().Frame(iframe);
 
                                 string tempString = Click(elementType, element);
-                                str = "Attempting in other frames...  " + tempString + Environment.NewLine;
+                                str = "Attempting in other frames...  " + tempString;
                                 str2 += str;
                                 if (Regex.IsMatch(tempString, @"\bClick Exception\b"))
                                 {
 
                                     tempString = JClick(elementType, element);
-                                    str = "Attempting in other frames...  " + tempString + Environment.NewLine;
+                                    str = "Attempting in other frames...  " + tempString;
                                     str2 += str;
                                     if (Regex.IsMatch(tempString, @"\bJClick Exception\b"))
                                     {
 
                                         tempString = Submit(elementType, element);
-                                        str = "Attempting in other frames...  " + tempString + Environment.NewLine;
+                                        str = "Attempting in other frames...  " + tempString;
                                         str2 += str;
                                         if (Regex.IsMatch(tempString, @"\bSubmit Exception\b"))
                                         {

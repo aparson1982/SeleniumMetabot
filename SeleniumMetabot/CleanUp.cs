@@ -50,6 +50,26 @@ namespace SeleniumMetabot
             return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
+        public string Close()
+        {
+            string str = string.Empty;
+            try
+            {
+                driver.Close();
+                str += "Closed the browser." + Environment.NewLine;
+            }
+            catch (Exception e)
+            {
+                str = "Attempted driver.Close() but received error." + Environment.NewLine +
+                      "Error" + Environment.NewLine +
+                      "Message:  " + e.Message + Environment.NewLine +
+                      "Source:  " + e.Source + Environment.NewLine +
+                      "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                      "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
+
         internal static string KillChromeDriverProcess()
         {
             string str = string.Empty;

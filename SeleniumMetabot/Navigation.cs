@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -92,7 +93,7 @@ namespace SeleniumMetabot
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
                     "Inner Exception:  " + e.InnerException + Environment.NewLine + 
-                    "Parameters:  elementType = " + elementType + " | element = " + element ;
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
             return SeleniumUtilities.MethodName() + ":  " + str;
         }
@@ -208,6 +209,66 @@ namespace SeleniumMetabot
             return str;
         }
 
+
+        internal static void SwitchToTabHelper(Expression<Func<IWebDriver, bool>> predicateExp)
+        {
+            var predicate = predicateExp.Compile();
+            foreach (var handle in driver.WindowHandles)
+            {
+                driver.SwitchTo().Window(handle);
+                if (predicate(driver))
+                {
+                    return;
+                }
+            }
+
+            throw new ArgumentException(string.Format("Unable to find window with condition: '{0}'", predicateExp.Body));
+        }
+
+
+        public static string SwitchToTab(string titleOfTab)
+        {
+            string str;
+            try
+            {
+                SwitchToTabHelper(driver => driver.Title == titleOfTab);
+                str = "Switched focus to the tab:  " + titleOfTab;
+                MethodSuccess = true;
+            }
+            catch (Exception e)
+            {
+                MethodSuccess = false;
+                str = "There was an exception switching Frames." + Environment.NewLine +
+                    "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
+
+
+        public static string CloseCurrentTab()
+        {
+            string str;
+            try
+            {
+                Actions actions = new Actions(driver);
+                actions.SendKeys(Keys.Control + "w");
+                MethodSuccess = true;
+                str = "Closed Current Tab.";
+            }
+            catch (Exception e)
+            {
+                MethodSuccess = false;
+                str = "There was an exception closing the current tab." + Environment.NewLine +
+                    "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
 
     }
 }

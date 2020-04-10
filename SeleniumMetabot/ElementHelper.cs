@@ -4,6 +4,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,7 +15,49 @@ namespace SeleniumMetabot
     public class ElementHelper : SeleniumProperties
     {
         private static string elementHelperMessages;
-        
+
+
+        public static string PollingWait(string elementType, string element, int timeoutInSeconds, int pollMilliseconds)
+        {
+            string str = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+            var stopWatch = Stopwatch.StartNew();
+            try
+            {
+                DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
+                fluentWait.Timeout = TimeSpan.FromSeconds(timeoutInSeconds);
+                fluentWait.PollingInterval = TimeSpan.FromMilliseconds(pollMilliseconds);
+                fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                fluentWait.Until((d) =>
+                {
+                    IWebElement webElement = WebElement(elementType, element);
+                    if (webElement.Displayed || webElement.Enabled)
+                    {
+                        return webElement;
+                    }
+                    throw new TimeoutException("Timed out.");
+
+                });
+                MethodSuccess = true;
+                str = "true";
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                MethodSuccess = false;
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            stopWatch.Stop();
+            return SeleniumUtilities.MethodName() + ":  " + str + "Total wait time:  " + stopWatch.Elapsed + Environment.NewLine;
+        }
+
         /// <summary>
         /// Implicitly waits for the element to be Displayed.
         /// </summary>
@@ -32,7 +75,7 @@ namespace SeleniumMetabot
                 wait.Until<IWebElement>((d) =>
                 {
                     IWebElement webElement = ElementHelper.WebElement(elementType, element);
-                    if (webElement.Displayed || webElement.GetAttribute("aria-disabled") == null)
+                    if (webElement.Displayed)
                     {
                        return webElement;
                     }
@@ -83,7 +126,7 @@ namespace SeleniumMetabot
                         driver.SwitchTo().Frame(iframe);
                         while (count <= timeoutInSeconds && MethodSuccess == false)
                         {
-                            str = "Attempting to find in other frames...  " + WaitDisplayed(elementType, element, count) + Environment.NewLine;
+                            str = "Attempting to find " + element + " in other frames...  " + WaitDisplayed(elementType, element, count) + Environment.NewLine;
 
                             count++;
                             
@@ -164,7 +207,7 @@ namespace SeleniumMetabot
                 wait.Until<IWebElement>((d) =>
                 {
                     IWebElement webElement = ElementHelper.WebElement(elementType, element);
-                    if (webElement.Enabled || webElement.GetAttribute("aria-disabled") == null)
+                    if (webElement.Enabled)
                     {
                         return webElement;
                     }
@@ -217,7 +260,7 @@ namespace SeleniumMetabot
                         while (count <= timeoutInSeconds && MethodSuccess == false)
                         {
 
-                            str = "Attempting to find in other frames...  " + WaitTilEnabled(elementType, element, count) + Environment.NewLine;
+                            str = "Attempting to find " + element + " in other frames...  " + WaitTilEnabled(elementType, element, count) + Environment.NewLine;
                             count++;
                             
                         }
@@ -241,6 +284,93 @@ namespace SeleniumMetabot
             return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
+        public static string CheckIfAriaDisabledIsNull(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                wait.Until<IWebElement>((d) =>
+                {
+                    IWebElement webElement = ElementHelper.WebElement(elementType, element);
+                    if (webElement.GetAttribute("aria-disabled") == null)
+                    {
+                        return webElement;
+                    }
+                    throw new TimeoutException("Timed out.");
+
+                });
+                MethodSuccess = true;
+                str = "true";
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                MethodSuccess = false;
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return str;
+        }
+
+        public static string iCheckIfAriaDisabledIsNull(string elementType, string element, int timeoutInSeconds)
+        {
+            string str = string.Empty;
+            int count = 1;
+            elementType = Regex.Replace(elementType, @"s", "");
+            try
+            {
+                Navigation.SwitchToDefaultFrame();
+                IList<IWebElement> iframes = driver.FindElements(By.XPath("//iframe"));
+
+                str = CheckIfAriaDisabledIsNull(elementType, element, timeoutInSeconds / 2);
+
+                if (MethodSuccess == false)
+                {
+                    foreach (IWebElement iframe in iframes)
+                    {
+                        driver.SwitchTo().Frame(iframe);
+                        while (count <= timeoutInSeconds && MethodSuccess == false)
+                        {
+                            str = "Attempting to find " + element + " in other frames...  " + CheckIfAriaDisabledIsNull(elementType, element, count) + Environment.NewLine;
+                            count++;
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            return SeleniumUtilities.MethodName() + ":  " + str;
+        }
+
+
+
 
         /// <summary>
         /// Implicit wait that waits for the element to be Enabled and Displayed
@@ -259,7 +389,7 @@ namespace SeleniumMetabot
                 wait.Until<IWebElement>((d) =>
                 {
                     IWebElement webElement = ElementHelper.WebElement(elementType, element);
-                    if (webElement.Enabled && webElement.Displayed || webElement.GetAttribute("aria-disabled") == null && webElement.Displayed)
+                    if (webElement.Enabled && webElement.Displayed)
                     {
                         return webElement;
                     }
@@ -284,6 +414,7 @@ namespace SeleniumMetabot
             }
             return str;
         }
+
 
 
         /// <summary>
@@ -312,7 +443,7 @@ namespace SeleniumMetabot
                         driver.SwitchTo().Frame(iframe);
                         while (count <= timeoutInSeconds && MethodSuccess == false)
                         {
-                            str = "Attempting to find in other frames...  " + WaitTilReady(elementType, element, count) + Environment.NewLine;
+                            str = "Attempting to find " + element + " in other frames...  " + WaitTilReady(elementType, element, count) + Environment.NewLine;
                             count++;
                         }
                         
@@ -335,11 +466,20 @@ namespace SeleniumMetabot
             return SeleniumUtilities.MethodName() + ":  " + str;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
         public static string iWaitForElement(string elementType, string element, int timeoutInSeconds)
         {
             string str = string.Empty;
             string str2 = string.Empty;
             elementType = Regex.Replace(elementType, @"s", "");
+            var stopWatch = Stopwatch.StartNew();
             try
             {
                 str = iWaitTilDisplayed(elementType, element, timeoutInSeconds);
@@ -372,7 +512,45 @@ namespace SeleniumMetabot
                     "Inner Exception:  " + e.InnerException + Environment.NewLine +
                     "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
-            return SeleniumUtilities.MethodName() + ":  " + str;
+            stopWatch.Stop();
+            return SeleniumUtilities.MethodName() + ":  " + str + "Total wait time:  " + stopWatch.Elapsed + Environment.NewLine;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementType"></param>
+        /// <param name="element"></param>
+        /// <param name="timeoutInSeconds"></param>
+        /// <returns></returns>
+        public static string iCheckDisplayedEnabledReady(string elementType, string element, int timeoutInSeconds)
+        {
+            elementType = Regex.Replace(elementType, @"s", "");
+            string str;
+            var stopWatch = Stopwatch.StartNew();
+            try
+            {
+                
+                str = iWaitTilDisplayed(elementType, element, timeoutInSeconds);
+
+                str += iWaitTilEnabled(elementType, element, timeoutInSeconds);
+
+                str += iWaitTilReady(elementType, element, timeoutInSeconds);
+            }
+            catch (Exception e)
+            {
+                if (doTakeScreenshot)
+                {
+                    ScreenShot.TakeScreenShot();
+                }
+                str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+            }
+            stopWatch.Stop();
+            return SeleniumUtilities.MethodName() + ":  " + str + "Total wait time:  " + stopWatch.Elapsed + Environment.NewLine;
         }
 
 
@@ -554,6 +732,8 @@ namespace SeleniumMetabot
             }
             return null;
         }
+
+        
 
         internal static IWebElement WebElement(string elementType, string element)
         {
