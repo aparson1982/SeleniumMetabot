@@ -43,6 +43,7 @@ namespace SeleniumMetabot
             }
             catch (Exception e)
             {
+
                 if (doTakeScreenshot)
                 {
                     ScreenShot.TakeScreenShot();
