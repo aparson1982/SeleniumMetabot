@@ -33,7 +33,7 @@ namespace SeleniumMetabot
         private static string _Path;
         public static string Path
         {
-            get { return _Path ?? String.Empty; }
+            get => _Path ?? string.Empty;
             set
             {
                 if (value == null)

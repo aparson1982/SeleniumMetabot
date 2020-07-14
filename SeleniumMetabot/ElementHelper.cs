@@ -24,9 +24,11 @@ namespace SeleniumMetabot
             var stopWatch = Stopwatch.StartNew();
             try
             {
-                DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
-                fluentWait.Timeout = TimeSpan.FromSeconds(timeoutInSeconds);
-                fluentWait.PollingInterval = TimeSpan.FromMilliseconds(pollMilliseconds);
+                DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver)
+                {
+                    Timeout = TimeSpan.FromSeconds(timeoutInSeconds),
+                    PollingInterval = TimeSpan.FromMilliseconds(pollMilliseconds)
+                };
                 fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
                 fluentWait.Until((d) =>
                 {
@@ -399,7 +401,7 @@ namespace SeleniumMetabot
                 });
                 MethodSuccess = true;
                 str = "true";
-             }
+            }
             catch (Exception e)
             {
                 if (doTakeScreenshot)
@@ -408,10 +410,10 @@ namespace SeleniumMetabot
                 }
                 MethodSuccess = false;
                 str = SeleniumUtilities.MethodName() + ":  " + "Message:  " + e.Message + Environment.NewLine +
-                    "Source:  " + e.Source + Environment.NewLine +
-                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
-                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
-                    "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
+                      "Source:  " + e.Source + Environment.NewLine +
+                      "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                      "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                      "Parameters:  elementType = " + elementType + " | element = " + element + Environment.NewLine;
             }
             return str;
         }

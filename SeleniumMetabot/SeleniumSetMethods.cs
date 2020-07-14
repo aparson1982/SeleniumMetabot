@@ -267,6 +267,7 @@ namespace SeleniumMetabot
         /// <param name="elementType"></param>
         /// <param name="element"></param>
         /// <param name="value"></param>
+        /// <param name="doClear"></param>
         public static string iEnterText(string elementType, string element, string value, bool doClear = true)
         {
             string str = string.Empty;
